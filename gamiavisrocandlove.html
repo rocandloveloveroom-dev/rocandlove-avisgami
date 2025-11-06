@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roc & Love - Votre surprise vous attend 💝</title>
+    
+    <meta property="og:title" content="Roc & Love - Votre surprise vous attend 💝">
+    <meta property="og:description" content="Un mot doux pour nous, une surprise pour vous">
+    <meta property="og:image" content="https://rocandlove-avisgami.vercel.app/assets/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:type" content="website">
+    
+    <link rel="icon" type="image/png" href="./assets/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @font-face {
+            font-family: 'Brittany Signature';
+            src: url('./assets/BrittanySignature.ttf') format('truetype');
+        }
+        .brittany { font-family: 'Brittany Signature', cursive; }
+        .georgia { font-family: Georgia, serif; }
+        .cormorant { font-family: 'Cormorant Garamond', serif; }
+        
+        .logo-header {
+            max-width: 280px; width: 100%; margin: 0 auto 2rem; display: block;
+        }
+        .logo-header img {
+            width: 100%; height: auto;
+            filter: drop-shadow(0 4px 6px rgba(185, 163, 120, 0.3));
+        }
+        .scratch-container {
+            position: relative; width: 100%; max-width: 450px; height: 450px;
+            margin: 0 auto; border-radius: 1.5rem; overflow: hidden;
+            background: linear-gradient(135deg, #B9A378 0%, #8B7355 100%);
+        }
+        .scratch-canvas {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 10; cursor: pointer; touch-action: none;
+        }
+        .prize-content {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; padding: 2rem; z-index: 1;
+        }
+        .star-beat { animation: starbeat 2s ease-in-out infinite; }
+        @keyframes starbeat {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+        .fade-in { animation: fadeIn 0.8s ease-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .code-display {
+            font-family: 'Courier New', monospace; letter-spacing: 0.25em;
+            text-shadow: 2px 2px 4px rgba(185, 163, 120, 0.5);
+        }
+        .blur-bubble {
+            position: fixed; width: 24rem; height: 24rem; border-radius: 50%;
+            filter: blur(80px); opacity: 0.3; pointer-events: none;
+        }
+        .checkbox-custom {
+            appearance: none; width: 24px; height: 24px;
+            border: 2px solid #B9A378; border-radius: 4px;
+            cursor: pointer; position: relative; background: transparent; flex-shrink: 0;
+        }
+        .checkbox-custom:checked { background: linear-gradient(135deg, #B9A378 0%, #8B7355 100%); }
+        .checkbox-custom:checked::after {
+            content: '✓'; position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); color: #000; font-size: 18px; font-weight: bold;
+        }
+        .hidden { display: none !important; }
+        .copy-btn-revealed { animation: slideUp 0.5s ease-out; }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .admin-gear {
+            position: absolute; top: 1rem; right: 1rem; padding: 0.5rem;
+            color: #6B7280; cursor: pointer; transition: color 0.3s; z-index: 100;
+        }
+        .admin-gear:hover { color: #B9A378; }
+        .admin-gear svg { width: 1.25rem; height: 1.25rem; }
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.8); display: flex;
+            align-items: center; justify-content: center; z-index: 9999;
+        }
+        .input-field {
+            width: 100%; padding: 12px; border: 2px solid #B9A378;
+            border-radius: 8px; background: rgba(255, 255, 255, 0.1); color: white;
+        }
+        .input-field:focus {
+            outline: none; border-color: #DCD1BC; background: rgba(255, 255, 255, 0.15);
+        }
+        .input-field::placeholder { color: rgba(255, 255, 255, 0.5); }
+    </style>
+</head>
+<body class="bg-black text-white min-h-screen">
+    <div class="blur-bubble bg-yellow-900 top-0 left-0"></div>
+    <div class="blur-bubble bg-yellow-900 bottom-0 right-0"></div>
+    
+    <div class="relative z-10 container mx-auto px-4 py-8 max-w-2xl">
+        
+        <div id="welcome-screen" class="fade-in">
+            <div class="bg-gradient-to-br from-gray-900 to-black border border-yellow-900/30 rounded-2xl p-6 sm:p-8 shadow-2xl mb-6 relative">
+                <a href="#" onclick="showAdminLogin(); return false;" class="admin-gear" title="Administration">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                </a>
+                
+                <div class="logo-header">
+                    <img src="./assets/logo.svg" alt="Roc & Love" onerror="this.style.display='none'; document.getElementById('fallback-title').style.display='block';" />
+                </div>
+                <h1 id="fallback-title" class="brittany text-5xl text-center mb-6 hidden" style="color: #B9A378;">Roc & Love</h1>
+                
+                <div class="text-center mb-8">
+                    <p class="brittany text-3xl sm:text-4xl text-gray-300 mb-2" style="color: #B9A378;">
+                        Merci pour votre séjour<span id="userNameDisplay"></span>
+                    </p>
+                    <div class="text-5xl star-beat">⭐</div>
+                </div>
+                
+                <div class="bg-yellow-900/20 border border-yellow-700/30 rounded-xl p-6 mb-6">
+                    <div class="text-center mb-4">
+                        <h2 class="georgia text-2xl font-semibold mb-3" style="color: #B9A378;">Un mot doux pour nous,<br>une surprise pour vous</h2>
+                    </div>
+                    <p class="georgia text-lg text-center text-gray-300 mb-4">Partagez votre expérience et découvrez le cadeau que nous vous avons réservé 🎁</p>
+                    <p class="text-sm text-gray-400 text-center">Quelques secondes suffisent pour nous aider à grandir</p>
+                </div>
+                
+                <button id="reviewButton" onclick="goToReview()" class="cormorant w-full py-4 px-8 rounded-xl font-bold text-xl text-black transition-all duration-300 hover:scale-105 mb-4" style="background: linear-gradient(135deg, #B9A378 0%, #8B7355 100%);">
+                    <span id="reviewButtonText">⭐ Partager votre expérience sur Google</span>
+                </button>
+                
+                <div class="bg-yellow-900/10 border border-yellow-700/20 rounded-xl p-4 mb-3">
+                    <label class="flex items-start gap-3 cursor-pointer">
+                        <input type="checkbox" id="reviewConfirm" class="checkbox-custom mt-1" onchange="toggleAccessButton()" />
+                        <span class="georgia text-sm text-gray-300">J'ai laissé mon avis et je veux découvrir ma surprise</span>
+                    </label>
+                </div>
+                
+                <button id="accessButton" onclick="checkNameAndShowScratch()" class="cormorant w-full py-4 px-8 rounded-xl font-bold text-xl text-black transition-all duration-300 hidden" style="background: linear-gradient(135deg, #B9A378 0%, #8B7355 100%);">🎁 Découvrir ma surprise</button>
+                
+                <p class="text-xs text-gray-500 text-center mt-4 italic">Une participation par séjour, non cumulable</p>
+            </div>
+        </div>
+        
+        <div id="name-form-screen" class="hidden fade-in">
+            <div class="bg-gradient-to-br from-gray-900 to-black border border-yellow-900/30 rounded-2xl p-6 sm:p-8 shadow-2xl">
+                <div class="logo-header"><img src="./assets/logo.svg" alt="Roc & Love" /></div>
+                <h2 class="brittany text-4xl sm:text-5xl text-center mb-4" style="color: #B9A378;">Une dernière chose !</h2>
+                <p class="georgia text-center text-gray-300 mb-6">Pour vous offrir votre cadeau, quel est votre prénom ?</p>
+                <div class="mb-6"><input type="text" id="userNameInput" class="input-field georgia text-center text-lg" placeholder="Votre prénom" required /></div>
+                <button onclick="saveNameAndShowScratch()" class="cormorant w-full py-4 px-8 rounded-xl font-bold text-xl text-black transition-all duration-300 hover:scale-105" style="background: linear-gradient(135deg, #B9A378 0%, #8B7355 100%);">Découvrir mon cadeau 🎁</button>
+            </div>
+        </div>
+        
+        <div id="scratch-screen" class="hidden fade-in">
+            <div class="bg-gradient-to-br from-gray-900 to-black border border-yellow-900/30 rounded-2xl p-6 sm:p-8 shadow-2xl">
+                <div class="logo-header"><img src="./assets/logo.svg" alt="Roc & Love" /></div>
+                <h2 class="brittany text-4xl sm:text-5xl text-center mb-6" style="color: #B9A378;">Merci pour votre avis !</h2>
+                <div class="bg-yellow-900/20 border border-yellow-700/30 rounded-xl p-4 mb-6 text-center"><p class="georgia text-sm">✨ Grattez pour découvrir votre cadeau</p></div>
+                <div class="scratch-container mb-6">
+                    <canvas id="scratchCanvas" class="scratch-canvas"></canvas>
+                    <div class="prize-content">
+                        <div class="text-center">
+                            <div class="text-7xl mb-4" id="prizeEmoji">🎁</div>
+                            <div class="brittany text-3xl sm:text-4xl font-bold mb-3 text-black" id="prizeTitle">Votre cadeau</div>
+                            <div class="text-lg text-gray-900 mb-4" id="prizeDescription">En cours...</div>
+                            <div class="bg-black/20 rounded-xl p-4 mt-4">
+                                <p class="text-sm text-gray-900 mb-2">Votre code promo :</p>
+                                <p class="text-2xl sm:text-3xl font-bold code-display text-black" id="prizeCode">ROCLOVE</p>
+                                <p class="text-xs text-gray-900 mt-2">À saisir sur <span class="font-semibold">www.rocandlove.fr</span></p>
+                            </div>
+                            <p class="text-xs text-gray-900 mt-3 italic">⏰ Offre valable 6 mois</p>
+                        </div>
+                    </div>
+                </div>
+                <button id="copyBtnCard" onclick="copyCodeFromCard()" class="cormorant w-full py-3 px-6 rounded-xl font-bold text-lg text-black transition-all duration-300 hover:scale-105 hidden copy-btn-revealed" style="background: linear-gradient(135deg, #B9A378 0%, #8B7355 100%);">📋 Copier le code</button>
+            </div>
+        </div>
+        
+        <div id="already-played-screen" class="hidden fade-in">
+            <div class="bg-gradient-to-br from-gray-900 to-black border border-yellow-900/30 rounded-2xl p-6 sm:p-8 shadow-2xl">
+                <div class="logo-header"><img src="./assets/logo.svg" alt="Roc & Love" /></div>
+                <div class="text-center mb-8">
+                    <div class="text-7xl mb-6" id="alreadyEmoji">✅</div>
+                    <h2 class="brittany text-4xl sm:text-5xl mb-8" style="color: #B9A378;">Vous avez déjà joué !</h2>
+                    <p class="georgia text-lg text-gray-400 mb-2">Vous aviez gagné :</p>
+                    <p class="brittany text-3xl sm:text-4xl font-bold mb-6" style="color: #B9A378;" id="alreadyPrizeTitle">Votre cadeau</p>
+                </div>
+                <div class="bg-yellow-900/20 border-2 border-yellow-700 rounded-xl p-6 mb-6">
+                    <p class="text-center text-sm text-gray-400 mb-3">Votre code promo unique :</p>
+                    <p class="text-4xl sm:text-5xl font-bold text-center code-display mb-4" style="color: #B9A378;" id="alreadyPromoCode">ROCLOVE</p>
+                    <div class="bg-black/20 rounded-lg p-4">
+                        <p class="georgia text-center text-sm text-gray-300">💻 Saisissez ce code lors de votre prochaine réservation sur<br><a href="https://www.rocandlove.fr" target="_blank" class="text-yellow-500 hover:text-yellow-400 font-semibold">www.rocandlove.fr</a></p>
+                    </div>
+                    <p class="text-center text-xs text-gray-500 mt-3 italic">⏰ Offre valable 6 mois</p>
+                </div>
+                <div class="bg-yellow-900/20 border border-yellow-700/30 rounded-xl p-6 mb-6"><p class="georgia text-center text-sm text-gray-300">💝 Nous avons hâte de vous accueillir à nouveau au Roc & Love !</p></div>
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="copyAlreadyCode()" class="cormorant py-3 px-6 rounded-xl font-bold text-black transition-all duration-300 hover:scale-105" style="background: linear-gradient(135deg, #B9A378 0%, #8B7355 100%);">📋 Copier</button>
+                    <button onclick="shareCode()" class="cormorant py-3 px-6 rounded-xl font-bold border-2 border-yellow-700 text-white transition-all duration-300 hover:bg-yellow-900/20">📱 Partager</button>
+                </div>
+                <p class="text-center text-xs text-gray-500 mt-6">Merci pour votre confiance ❤️</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="adminLoginModal" class="modal-overlay hidden" onclick="closeAdminLogin(event)">
+        <div class="bg-gradient-to-br from-gray-900 to-black border border-yellow-900/30 rounded-2xl p-8 max-w-md w-full mx-4" onclick="event.stopPropagation()">
+            <h3 class="brittany text-3xl text-center mb-6" style="color: #B9A378;">Accès Admin</h3>
+            <input type="password" id="adminPassword" class="input-field georgia mb-4" placeholder="Mot de passe" onkeypress="if(event.key==='Enter') loginAdmin()" />
+            <button onclick="loginAdmin()" class="cormorant w-full py-3 px-6 rounded-xl font-bold text-black transition-all duration-300 hover:scale-105 mb-3" style="background: linear-gradient(135deg, #B9A378 0%, #8B7355 100%);">Se connecter</button>
+            <button onclick="closeAdminLogin()" class="cormorant w-full py-3 px-6 rounded-xl font-bold border-2 border-yellow-700 text-white transition-all duration-300 hover:bg-yellow-900/20">Annuler</button>
+            <p id="loginError" class="text-red-400 text-sm text-center mt-3 hidden">Mot de passe incorrect</p>
+        </div>
+    </div>
+    
+    <script>
+        const CHANNELS={booking:{name:'Booking.com',icon:'🏨',buttonText:'Partager votre expérience sur Booking',storageKey:'rocLoveBookingUrl'},airbnb:{name:'Airbnb',icon:'🏠',buttonText:'Partager votre expérience sur Airbnb',storageKey:'rocLoveAirbnbUrl'},direct:{name:'Google',icon:'⭐',buttonText:'Partager votre expérience sur Google',storageKey:'rocLoveGoogleUrl'}};
+        function loadPrizes(){const saved=localStorage.getItem('rocLovePrizes');return saved?JSON.parse(saved):[{id:1,title:'10% de réduction',description:'sur votre prochaine réservation',emoji:'🎫',probability:15,code:'ROCLOVE10'},{id:2,title:'15% de réduction',description:'sur votre prochaine réservation',emoji:'🎟️',probability:5,code:'ROCLOVE15'},{id:3,title:'Bouteille de Vouvray offerte',description:'lors de votre prochaine réservation',emoji:'🍾',probability:50,code:'ROCLOVEVV'},{id:4,title:'Love Box offerte',description:'lors de votre prochaine réservation',emoji:'💝',probability:30,code:'ROCLOVELB'}]}
+        const PRIZES=loadPrizes();let currentPrize=null,promoCode='',canvas,ctx,isScratching=false;let sessionId='',hasRevealed=false,clientName='',clientPhone='',reviewChannel='direct';
+        function generateSessionId(){return'session_'+Date.now().toString(36)+Math.random().toString(36).substring(2)}
+        function selectPrize(){const random=Math.random()*100;let cumulative=0;for(let prize of PRIZES){cumulative+=prize.probability;if(random<=cumulative)return prize}return PRIZES[0]}
+        function getURLParams(){const params=new URLSearchParams(window.location.search);return{name:params.get('n')||params.get('nom')||params.get('prenom')||'',phone:params.get('t')||params.get('tel')||params.get('telephone')||'',source:params.get('s')||params.get('source')||'direct'}}
+        function setupChannel(source){reviewChannel=source;const channel=CHANNELS[source]||CHANNELS.direct;document.getElementById('reviewButtonText').textContent=`${channel.icon} ${channel.buttonText}`}
+        function toggleAccessButton(){const checkbox=document.getElementById('reviewConfirm');const button=document.getElementById('accessButton');if(checkbox.checked){button.classList.remove('hidden');button.classList.add('fade-in')}else{button.classList.add('hidden')}}
+        function goToReview(){const channel=CHANNELS[reviewChannel]||CHANNELS.direct;const reviewUrl=localStorage.getItem(channel.storageKey)||'https://www.google.com/maps';window.open(reviewUrl,'_blank');localStorage.setItem('rocLoveSession_'+sessionId,JSON.stringify({clickedReview:true,timestamp:new Date().toISOString(),channel:reviewChannel}))}
+        function checkNameAndShowScratch(){if(clientName){showScratchCard()}else{document.getElementById('welcome-screen').classList.add('hidden');document.getElementById('name-form-screen').classList.remove('hidden')}}
+        function saveNameAndShowScratch(){const nameInput=document.getElementById('userNameInput').value.trim();if(!nameInput){alert('Merci d\'entrer votre prénom 😊');return}clientName=nameInput;showScratchCard()}
+        function showScratchCard(){document.getElementById('welcome-screen').classList.add('hidden');document.getElementById('name-form-screen').classList.add('hidden');document.getElementById('scratch-screen').classList.remove('hidden');currentPrize=selectPrize();promoCode=currentPrize.code;document.getElementById('prizeEmoji').textContent=currentPrize.emoji;document.getElementById('prizeTitle').textContent=currentPrize.title;document.getElementById('prizeDescription').textContent=currentPrize.description;document.getElementById('prizeCode').textContent=promoCode;setTimeout(initScratchCard,100)}
+        function initScratchCard(){canvas=document.getElementById('scratchCanvas');const container=canvas.parentElement;const rect=container.getBoundingClientRect();canvas.width=rect.width;canvas.height=rect.height;ctx=canvas.getContext('2d',{willReadFrequently:true});const gradient=ctx.createLinearGradient(0,0,canvas.width,canvas.height);gradient.addColorStop(0,'#DCD1BC');gradient.addColorStop(0.5,'#B9A378');gradient.addColorStop(1,'#8B7355');ctx.fillStyle=gradient;ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='rgba(79,60,35,0.4)';ctx.font='bold 32px Georgia';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('GRATTEZ ICI',canvas.width/2,canvas.height/2-30);ctx.font='40px Arial';ctx.fillText('🍀 🎰 ✨',canvas.width/2,canvas.height/2+30);canvas.addEventListener('mousedown',handleStart);canvas.addEventListener('mousemove',handleMove);canvas.addEventListener('mouseup',handleEnd);canvas.addEventListener('mouseleave',handleEnd);canvas.addEventListener('touchstart',handleStart,{passive:false});canvas.addEventListener('touchmove',handleMove,{passive:false});canvas.addEventListener('touchend',handleEnd);canvas.addEventListener('touchcancel',handleEnd)}
+        function handleStart(e){e.preventDefault();isScratching=true;scratch(e)}
+        function handleMove(e){if(!isScratching)return;e.preventDefault();scratch(e)}
+        function handleEnd(e){if(e)e.preventDefault();isScratching=false}
+        function getCoordinates(e){const rect=canvas.getBoundingClientRect();const scaleX=canvas.width/rect.width;const scaleY=canvas.height/rect.height;let clientX,clientY;if(e.touches&&e.touches.length>0){clientX=e.touches[0].clientX;clientY=e.touches[0].clientY}else{clientX=e.clientX;clientY=e.clientY}return{x:(clientX-rect.left)*scaleX,y:(clientY-rect.top)*scaleY}}
+        function scratch(e){const{x,y}=getCoordinates(e);ctx.globalCompositeOperation='destination-out';ctx.beginPath();ctx.arc(x,y,30,0,Math.PI*2);ctx.fill();checkScratchProgress()}
+        function checkScratchProgress(){if(hasRevealed)return;const imageData=ctx.getImageData(0,0,canvas.width,canvas.height);const pixels=imageData.data;let transparent=0;for(let i=3;i<pixels.length;i+=4){if(pixels[i]<128)transparent++}const scratchedPercent=(transparent/(pixels.length/4))*100;if(scratchedPercent>80)revealPrize()}
+        function revealPrize(){hasRevealed=true;ctx.clearRect(0,0,canvas.width,canvas.height);document.getElementById('copyBtnCard').classList.remove('hidden');const scratchData={sessionId,clientName,clientPhone,prize:currentPrize,code:promoCode,date:new Date().toISOString(),reviewClicked:true,scratched:true,channel:reviewChannel};localStorage.setItem('rocLoveScratch_'+sessionId,JSON.stringify(scratchData));let adminData=JSON.parse(localStorage.getItem('rocLoveAdminData')||'[]');adminData.push(scratchData);localStorage.setItem('rocLoveAdminData',JSON.stringify(adminData))}
+        function copyCodeFromCard(){const code=document.getElementById('prizeCode').textContent;copyToClipboard(code);const button=document.getElementById('copyBtnCard');const originalText=button.innerHTML;button.innerHTML='✓ Copié !';setTimeout(()=>{button.innerHTML=originalText},2000)}
+        function copyAlreadyCode(){const code=document.getElementById('alreadyPromoCode').textContent;copyToClipboard(code);const button=event.target;const originalText=button.innerHTML;button.innerHTML='✓ Copié !';setTimeout(()=>{button.innerHTML=originalText},2000)}
+        function copyToClipboard(text){if(navigator.clipboard){navigator.clipboard.writeText(text)}else{const textarea=document.createElement('textarea');textarea.value=text;textarea.style.position='fixed';textarea.style.opacity='0';document.body.appendChild(textarea);textarea.select();document.execCommand('copy');document.body.removeChild(textarea)}}
+        function shareCode(){const code=document.getElementById('alreadyPromoCode').textContent;const text=`Mon code promo Roc & Love : ${code}`;if(navigator.share){navigator.share({title:'Roc & Love',text:text})}else{copyAlreadyCode()}}
+        function showAdminLogin(){document.getElementById('adminLoginModal').classList.remove('hidden');document.getElementById('adminPassword').focus()}
+        function closeAdminLogin(event){if(event&&event.target!==event.currentTarget)return;document.getElementById('adminLoginModal').classList.add('hidden');document.getElementById('adminPassword').value='';document.getElementById('loginError').classList.add('hidden')}
+        function loginAdmin(){const password=document.getElementById('adminPassword').value;const savedPassword=localStorage.getItem('rocLoveAdminPassword')||'RocLove2025';if(password===savedPassword){window.location.href='./gamiavisadmin.html'}else{document.getElementById('loginError').classList.remove('hidden');setTimeout(()=>{document.getElementById('loginError').classList.add('hidden')},3000)}}
+        window.onload=function(){sessionId=generateSessionId();const urlParams=getURLParams();if(urlParams.name){clientName=urlParams.name;clientPhone=urlParams.phone;document.getElementById('userNameDisplay').textContent=' '+clientName}setupChannel(urlParams.source);const existingSessions=Object.keys(localStorage).filter(key=>key.startsWith('rocLoveScratch_'));if(existingSessions.length>0){const lastSession=localStorage.getItem(existingSessions[existingSessions.length-1]);if(lastSession){const data=JSON.parse(lastSession);currentPrize=data.prize;promoCode=data.code;clientName=data.clientName;clientPhone=data.clientPhone;sessionId=data.sessionId;reviewChannel=data.channel||'direct';document.getElementById('welcome-screen').classList.add('hidden');document.getElementById('already-played-screen').classList.remove('hidden');document.getElementById('alreadyEmoji').textContent=currentPrize.emoji;document.getElementById('alreadyPrizeTitle').textContent=currentPrize.title;document.getElementById('alreadyPromoCode').textContent=promoCode}}}
+    </script>
+</body>
+</html>
