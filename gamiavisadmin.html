@@ -6,7 +6,6 @@
     <title>Roc & Love - Admin Dashboard</title>
     <link rel="icon" type="image/png" href="./assets/favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
     <style>
         @font-face{font-family:'Brittany Signature';src:url('./assets/BrittanySignature.ttf') format('truetype')}
         .brittany{font-family:'Brittany Signature',cursive}.georgia{font-family:Georgia,serif}.cormorant{font-family:'Cormorant Garamond',serif}
@@ -167,6 +166,96 @@
     
     <script>
         let adminData=[],isPasswordVisible=!1,prizes=[],editingPrizeId=null,currentQRCode=null;async function loadData(){await loadFromNeon();prizes=JSON.parse(localStorage.getItem('rocLovePrizes')||'[]');if(0===prizes.length){prizes=[{id:1,title:'10% de réduction',description:'sur votre prochaine réservation',emoji:'🎫',probability:15,code:'ROCLOVE10'},{id:2,title:'15% de réduction',description:'sur votre prochaine réservation',emoji:'🎟️',probability:5,code:'ROCLOVE15'},{id:3,title:'Bouteille de Vouvray offerte',description:'lors de votre prochaine réservation',emoji:'🍾',probability:50,code:'ROCLOVEVV'},{id:4,title:'Love Box offerte',description:'lors de votre prochaine réservation',emoji:'💝',probability:30,code:'ROCLOVELB'}];savePrizes()}updateStatistics();updateChannelStats();updateHistory();updatePrizesStats();updatePrizesList();loadConfig()}async function loadFromNeon(){try{const response=await fetch('/api/get-participations');if(!response.ok){console.error('Erreur chargement');adminData=[];return}const data=await response.json();if(data.success&&data.participations){adminData=data.participations.map(p=>({sessionId:p.session_id,clientName:p.client_name,clientPhone:p.client_phone,prize:{emoji:p.prize_emoji,title:p.prize_title,description:p.prize_description},code:p.promo_code,date:p.created_at,reviewClicked:p.review_clicked,scratched:p.scratched,channel:p.channel,notes:p.notes||''}))}}catch(error){console.error('Erreur API:',error);adminData=[]}}function savePrizes(){localStorage.setItem('rocLovePrizes',JSON.stringify(prizes))}function generateLink(){const name=document.getElementById('genName').value.trim(),phone=document.getElementById('genPhone').value.trim(),channel=document.getElementById('genChannel').value;if(!name){alert("Merci d'entrer le prénom du client");return}const siteUrl='https://rocandlove-avisgami.vercel.app';let link=`${siteUrl}/?n=${encodeURIComponent(name)}`;phone&&(link+=`&t=${encodeURIComponent(phone)}`);link+=`&s=${channel}`;document.getElementById('generatedLink').value=link;document.getElementById('generatedResult').classList.remove('hidden');document.getElementById('qrcodeCanvas').innerHTML='';QRCode.toCanvas(document.createElement('canvas'),link,{width:256,margin:2,color:{dark:'#000000',light:'#FFFFFF'}},function(error,canvas){if(error){console.error(error);return}document.getElementById('qrcodeCanvas').appendChild(canvas);currentQRCode=canvas})}function copyGeneratedLink(){const link=document.getElementById('generatedLink').value;navigator.clipboard.writeText(link);const button=event.target,originalText=button.textContent;button.textContent='✓';setTimeout(()=>{button.textContent=originalText},2000)}function downloadQRCode(){if(!currentQRCode)return;const link=document.createElement('a');link.download=`qrcode-${document.getElementById('genName').value}.png`;link.href=currentQRCode.toDataURL();link.click()}function printQRCode(){if(!currentQRCode)return;const win=window.open('','_blank');win.document.write('<html><head><title>QR Code</title></head><body style="text-align:center">');win.document.write('<h2>Roc & Love - QR Code</h2>');win.document.write('<p>'+document.getElementById('genName').value+'</p>');win.document.write('<img src="'+currentQRCode.toDataURL()+'"/>');win.document.write('</body></html>');win.document.close();win.print()}function updateStatistics(){const total=adminData.length,reviewsClicked=adminData.filter(d=>d.reviewClicked).length,conversionRate=total>0?((reviewsClicked/total)*100).toFixed(1):0;document.getElementById('totalParticipations').textContent=total;document.getElementById('totalReviews').textContent=reviewsClicked;document.getElementById('conversionRate').textContent=conversionRate+'%';document.getElementById('codesUsed').textContent='0'}function updateChannelStats(){const channels={booking:{name:'Booking',icon:'🏨',count:0,reviews:0},airbnb:{name:'Airbnb',icon:'🏠',count:0,reviews:0},direct:{name:'Direct',icon:'⭐',count:0,reviews:0}};adminData.forEach(d=>{const channel=d.channel||'direct';if(channels[channel]){channels[channel].count++;if(d.reviewClicked)channels[channel].reviews++}});const html=Object.entries(channels).map(([key,data])=>{const rate=data.count>0?((data.reviews/data.count)*100).toFixed(0):0;return`<div class="stat-card"><div class="text-4xl mb-2">${data.icon}</div><div class="text-sm text-gray-400 mb-1">${data.name}</div><div class="text-2xl font-bold mb-1" style="color:#B9A378">${data.count}</div><div class="text-xs text-gray-500">${data.reviews} avis (${rate}%)</div></div>`}).join('');document.getElementById('channelStats').innerHTML=html}function updatePrizesStats(){const codeCounts={};prizes.forEach(p=>{codeCounts[p.code]=0});adminData.forEach(d=>{if(d.code&&codeCounts.hasOwnProperty(d.code))codeCounts[d.code]++});const html=prizes.map(prize=>`<div class="stat-card"><div class="flex items-center justify-between mb-2"><span class="text-4xl">${prize.emoji}</span><span class="code-badge code-${prize.code}">${prize.code}</span></div><div class="text-sm text-gray-400 mb-1">${prize.title}</div><div class="text-2xl font-bold" style="color:#B9A378">${codeCounts[prize.code]||0}</div><div class="text-xs text-gray-500 mt-1">Proba: ${prize.probability}%</div></div>`).join('');document.getElementById('prizesStats').innerHTML=html}function updatePrizesList(){const totalProba=prizes.reduce((sum,p)=>sum+p.probability,0),warningClass=100!==totalProba?'border-red-500':'',html=prizes.map(prize=>`<div class="stat-card ${warningClass}"><div class="flex items-center justify-between"><div class="flex items-center gap-4 flex-1"><span class="text-5xl">${prize.emoji}</span><div class="flex-1"><h3 class="text-xl font-bold" style="color:#B9A378">${prize.title}</h3><p class="text-sm text-gray-400">${prize.description}</p><div class="flex items-center gap-3 mt-2"><span class="code-badge code-${prize.code}">${prize.code}</span><span class="text-sm text-gray-500">Proba: ${prize.probability}%</span></div></div></div><div class="flex gap-2"><button onclick="editPrize(${prize.id})" class="cormorant py-2 px-4 rounded-lg font-bold text-sm text-black transition-all duration-300 hover:scale-105" style="background:linear-gradient(135deg,#B9A378 0%,#8B7355 100%)">✏️</button><button onclick="deletePrize(${prize.id})" class="cormorant py-2 px-4 rounded-lg font-bold text-sm border-2 border-red-500 text-red-400 transition-all duration-300 hover:bg-red-900/20">🗑️</button></div></div></div>`).join(''),warning=100!==totalProba?`<div class="bg-red-900/20 border border-red-500 rounded-xl p-4 mb-4"><p class="text-red-400 text-center">⚠️ Total = ${totalProba}% (doit être 100%)</p></div>`:'';document.getElementById('prizesList').innerHTML=warning+html}function getChannelBadge(channel){const channels={booking:{class:'channel-booking',text:'🏨 Booking'},airbnb:{class:'channel-airbnb',text:'🏠 Airbnb'},direct:{class:'channel-direct',text:'⭐ Direct'}},ch=channels[channel]||channels.direct;return`<span class="channel-badge ${ch.class}">${ch.text}</span>`}function updateHistory(){const tbody=document.getElementById('historyTable');if(0===adminData.length){tbody.innerHTML='<tr><td colspan="9" class="text-center text-gray-500 py-8">Aucune participation</td></tr>';return}const sortedData=[...adminData].sort((a,b)=>new Date(b.date)-new Date(a.date));tbody.innerHTML=sortedData.map((item,index)=>{const date=new Date(item.date),dateStr=date.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}),clientName=item.clientName||'Non renseigné',clientPhone=item.clientPhone||'Non renseigné',channel=item.channel||'direct',prizeTitle=item.prize?.title||'Inconnu',prizeEmoji=item.prize?.emoji||'🎁',code=item.code||'N/A',reviewIcon=item.reviewClicked?'✅':'❌',notes=item.notes||'';return`<tr><td>${dateStr}</td><td class="font-semibold">${clientName}</td><td><a href="tel:${clientPhone}" class="text-yellow-700 hover:text-yellow-500">${clientPhone}</a></td><td>${getChannelBadge(channel)}</td><td>${prizeEmoji} ${prizeTitle}</td><td><span class="code-badge code-${code}">${code}</span></td><td class="text-center">${reviewIcon}</td><td><input type="text" value="${notes}" onchange="saveNote(${index}, this.value)" placeholder="Notes..." class="w-full px-2 py-1 bg-gray-800 border border-gray-700 rounded text-sm"/></td><td><button onclick="deleteEntry(${index})" class="text-red-400 hover:text-red-300 text-xs">🗑️</button></td></tr>`}).join('')}function saveNote(index,note){adminData[index].notes=note;localStorage.setItem('rocLoveAdminData',JSON.stringify(adminData))}function deleteEntry(index){if(confirm('Supprimer ?')){adminData.splice(index,1);localStorage.setItem('rocLoveAdminData',JSON.stringify(adminData));updateHistory();updateStatistics();updateChannelStats()}}function exportData(){if(0===adminData.length){alert('Aucune donnée');return}const headers=['Date','Nom','Téléphone','Canal','Lot','Code','Avis','Notes'],rows=adminData.map(item=>{const date=new Date(item.date).toLocaleString('fr-FR'),name=item.clientName||'Non renseigné',phone=item.clientPhone||'Non renseigné',channel=item.channel||'direct',prize=item.prize?.title||'Inconnu',code=item.code||'N/A',review=item.reviewClicked?'Oui':'Non',notes=item.notes||'';return[date,name,phone,channel,prize,code,review,notes]}),csvContent=[headers.join(','),...rows.map(row=>row.map(cell=>`"${cell}"`).join(','))].join('\n'),blob=new Blob([csvContent],{type:'text/csv;charset=utf-8;'}),link=document.createElement('a'),url=URL.createObjectURL(blob);link.setAttribute('href',url);link.setAttribute('download',`roc-love-export-${new Date().toISOString().split('T')[0]}.csv`);link.style.visibility='hidden';document.body.appendChild(link);link.click();document.body.removeChild(link)}function showTab(tabName){document.querySelectorAll('.tab-content').forEach(el=>el.classList.add('hidden'));document.querySelectorAll('.tab-button').forEach(el=>el.classList.remove('active'));document.getElementById('content-'+tabName).classList.remove('hidden');document.getElementById('tab-'+tabName).classList.add('active')}function showPasswordModal(){document.getElementById('passwordModal').classList.remove('hidden');document.getElementById('currentPasswordDisplay').value='********';isPasswordVisible=!1}function closePasswordModal(event){if(event&&event.target!==event.currentTarget)return;document.getElementById('passwordModal').classList.add('hidden');document.getElementById('newPassword').value='';document.getElementById('confirmPassword').value='';document.getElementById('passwordMessage').classList.add('hidden')}function togglePasswordVisibility(){const currentPassword=localStorage.getItem('rocLoveAdminPassword')||'RocLove2025',input=document.getElementById('currentPasswordDisplay');if(isPasswordVisible){input.value='********';isPasswordVisible=!1}else{input.value=currentPassword;isPasswordVisible=!0}}function changePassword(){const newPassword=document.getElementById('newPassword').value,confirmPassword=document.getElementById('confirmPassword').value,messageEl=document.getElementById('passwordMessage');if(!newPassword||!confirmPassword){messageEl.textContent='Remplir tous les champs';messageEl.className='text-red-400 text-sm text-center mt-3';messageEl.classList.remove('hidden');return}if(newPassword!==confirmPassword){messageEl.textContent='Pas identiques';messageEl.className='text-red-400 text-sm text-center mt-3';messageEl.classList.remove('hidden');return}if(6>newPassword.length){messageEl.textContent='Min 6 caractères';messageEl.className='text-red-400 text-sm text-center mt-3';messageEl.classList.remove('hidden');return}localStorage.setItem('rocLoveAdminPassword',newPassword);messageEl.textContent='✓ Changé !';messageEl.className='text-green-400 text-sm text-center mt-3';messageEl.classList.remove('hidden');setTimeout(()=>{closePasswordModal()},2000)}function showAddPrizeModal(){editingPrizeId=null;document.getElementById('prizeModalTitle').textContent='Ajouter un lot';document.getElementById('prizeEmoji').value='';document.getElementById('prizeTitle').value='';document.getElementById('prizeDescription').value='';document.getElementById('prizeCode').value='';document.getElementById('prizeProbability').value='';document.getElementById('prizeModal').classList.remove('hidden')}function editPrize(id){const prize=prizes.find(p=>p.id===id);if(!prize)return;editingPrizeId=id;document.getElementById('prizeModalTitle').textContent='Modifier';document.getElementById('prizeEmoji').value=prize.emoji;document.getElementById('prizeTitle').value=prize.title;document.getElementById('prizeDescription').value=prize.description;document.getElementById('prizeCode').value=prize.code;document.getElementById('prizeProbability').value=prize.probability;document.getElementById('prizeModal').classList.remove('hidden')}function closePrizeModal(event){if(event&&event.target!==event.currentTarget)return;document.getElementById('prizeModal').classList.add('hidden')}function savePrize(){const emoji=document.getElementById('prizeEmoji').value.trim(),title=document.getElementById('prizeTitle').value.trim(),description=document.getElementById('prizeDescription').value.trim(),code=document.getElementById('prizeCode').value.trim().toUpperCase(),probability=parseInt(document.getElementById('prizeProbability').value);if(!emoji||!title||!description||!code||!probability){alert('Remplir tous les champs');return}if(0>probability||100<probability){alert('0-100');return}if(editingPrizeId){const index=prizes.findIndex(p=>p.id===editingPrizeId);-1!==index&&(prizes[index]={id:editingPrizeId,emoji,title,description,code,probability})}else{const newId=0<prizes.length?Math.max(...prizes.map(p=>p.id))+1:1;prizes.push({id:newId,emoji,title,description,code,probability})}savePrizes();updatePrizesList();updatePrizesStats();closePrizeModal()}function deletePrize(id){if(!confirm('Supprimer ?'))return;prizes=prizes.filter(p=>p.id!==id);savePrizes();updatePrizesList();updatePrizesStats()}function loadConfig(){document.getElementById('bookingUrl').value=localStorage.getItem('rocLoveBookingUrl')||'';document.getElementById('airbnbUrl').value=localStorage.getItem('rocLoveAirbnbUrl')||'';document.getElementById('googleUrl').value=localStorage.getItem('rocLoveGoogleUrl')||''}function saveConfig(){const bookingUrl=document.getElementById('bookingUrl').value.trim(),airbnbUrl=document.getElementById('airbnbUrl').value.trim(),googleUrl=document.getElementById('googleUrl').value.trim();if((bookingUrl&&!bookingUrl.startsWith('http'))||(airbnbUrl&&!airbnbUrl.startsWith('http'))||(googleUrl&&!googleUrl.startsWith('http'))){alert('URL invalide');return}localStorage.setItem('rocLoveBookingUrl',bookingUrl);localStorage.setItem('rocLoveAirbnbUrl',airbnbUrl);localStorage.setItem('rocLoveGoogleUrl',googleUrl);alert('✓ Sauvegardé !')}setInterval(loadData,5000);window.onload=loadData;
+    </script>
+    
+    <script>
+    // ✅ CORRECTION QRCODE - Utilise une API au lieu d'une bibliothèque bloquée
+    let currentQRCodeUrl = null;
+    
+    window.generateLink = function() {
+        const name = document.getElementById('genName').value.trim();
+        const phone = document.getElementById('genPhone').value.trim();
+        const channel = document.getElementById('genChannel').value;
+        
+        if (!name) {
+            alert("Merci d'entrer le prénom du client");
+            return;
+        }
+        
+        const siteUrl = 'https://rocandlove-avisgami.vercel.app';
+        let link = `${siteUrl}/?n=${encodeURIComponent(name)}`;
+        
+        if (phone) {
+            link += `&t=${encodeURIComponent(phone)}`;
+        }
+        
+        link += `&s=${channel}`;
+        
+        document.getElementById('generatedLink').value = link;
+        document.getElementById('generatedResult').classList.remove('hidden');
+        
+        // Générer le QR Code via API (fonctionne à tous les coups !)
+        const qrCodeSize = 256;
+        currentQRCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=${qrCodeSize}x${qrCodeSize}&data=${encodeURIComponent(link)}`;
+        
+        document.getElementById('qrcodeCanvas').innerHTML = `
+            <img src="${currentQRCodeUrl}" 
+                 alt="QR Code" 
+                 style="border: 4px solid #B9A378; border-radius: 1rem; padding: 1rem; background: #fff; display: block; margin: 0 auto;"
+                 onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22256%22 height=%22256%22><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22>Erreur QR</text></svg>'"
+            />
+        `;
+    };
+    
+    window.downloadQRCode = function() {
+        if (!currentQRCodeUrl) {
+            alert('⚠️ Générez d\'abord un lien');
+            return;
+        }
+        
+        const name = document.getElementById('genName').value.trim();
+        const link = document.createElement('a');
+        link.href = currentQRCodeUrl;
+        link.download = `qrcode-${name}.png`;
+        link.target = '_blank';
+        link.click();
+    };
+    
+    window.printQRCode = function() {
+        if (!currentQRCodeUrl) {
+            alert('⚠️ Générez d\'abord un lien');
+            return;
+        }
+        
+        const name = document.getElementById('genName').value.trim();
+        const win = window.open('', '_blank');
+        win.document.write(`
+            <html>
+            <head>
+                <title>QR Code - ${name}</title>
+                <style>
+                    body { 
+                        text-align: center; 
+                        font-family: Georgia, serif;
+                        padding: 2rem;
+                    }
+                    h2 { color: #B9A378; }
+                    img { margin: 2rem auto; }
+                </style>
+            </head>
+            <body>
+                <h2>Roc & Love - QR Code</h2>
+                <p style="font-size: 1.2rem; margin: 1rem;">${name}</p>
+                <img src="${currentQRCodeUrl}" alt="QR Code" />
+                <p style="font-size: 0.9rem; color: #666;">Scannez ce code pour accéder à votre surprise</p>
+            </body>
+            </html>
+        `);
+        win.document.close();
+        setTimeout(() => win.print(), 500);
+    };
+    
+    console.log('✅ QR Code corrigé - Utilise maintenant une API externe');
     </script>
 </body>
 </html>
