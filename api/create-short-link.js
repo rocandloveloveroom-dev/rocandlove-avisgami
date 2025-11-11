@@ -18,6 +18,8 @@ export default async function handler(req, res) {
   try {
     const { clientName, clientPhone, channel } = req.body;
 
+    console.log('📝 Création lien court - Données reçues:', { clientName, clientPhone, channel });
+
     if (!clientName) {
       return res.status(400).json({ error: 'Client name is required' });
     }
@@ -34,6 +36,8 @@ export default async function handler(req, res) {
       // Générer un code aléatoire de 5 caractères (lettres + chiffres)
       code = Math.random().toString(36).substring(2, 7).toLowerCase();
       
+      console.log(`🔍 Test code: ${code} (tentative ${attempts + 1})`);
+      
       // Vérifier si le code existe déjà
       const existing = await sql`
         SELECT code FROM short_links WHERE code = ${code}
@@ -46,15 +50,20 @@ export default async function handler(req, res) {
     }
 
     if (!isUnique) {
+      console.error('❌ Impossible de générer un code unique');
       return res.status(500).json({ error: 'Failed to generate unique code' });
     }
 
+    console.log(`✅ Code unique trouvé: ${code}`);
+
     // Insérer le lien court dans la base de données
     const result = await sql`
-      INSERT INTO short_links (code, client_name, client_phone, channel, clicks, created_at)
-      VALUES (${code}, ${clientName}, ${clientPhone || ''}, ${channel || 'direct'}, 0, NOW())
+      INSERT INTO short_links (code, client_name, client_phone, channel, clicks)
+      VALUES (${code}, ${clientName}, ${clientPhone || ''}, ${channel || 'direct'}, 0)
       RETURNING *
     `;
+
+    console.log('✅ Lien court créé avec succès:', result[0]);
 
     const shortLink = result[0];
     const baseUrl = 'https://rocandlove-avisgami.vercel.app';
@@ -68,7 +77,8 @@ export default async function handler(req, res) {
     });
 
   } catch (error) {
-    console.error('Error creating short link:', error);
+    console.error('❌ Erreur création lien court:', error);
+    console.error('Stack:', error.stack);
     res.status(500).json({ 
       error: 'Failed to create short link',
       details: error.message 
