@@ -1,3 +1,9 @@
 {
-  "version": 2
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/l/:code",
+      "destination": "/api/resolve-short-link?code=:code"
+    }
+  ]
 }
