@@ -259,7 +259,73 @@
         function showAdminLogin(){document.getElementById('adminLoginModal').classList.remove('hidden');document.getElementById('adminPassword').focus()}
         function closeAdminLogin(event){if(event&&event.target!==event.currentTarget)return;document.getElementById('adminLoginModal').classList.add('hidden');document.getElementById('adminPassword').value='';document.getElementById('loginError').classList.add('hidden')}
         function loginAdmin(){const password=document.getElementById('adminPassword').value;const savedPassword=localStorage.getItem('rocLoveAdminPassword')||'RocLove2025';if(password===savedPassword){window.location.href='./gamiavisadmin.html'}else{document.getElementById('loginError').classList.remove('hidden');setTimeout(()=>{document.getElementById('loginError').classList.add('hidden')},3000)}}
-        window.onload=function(){sessionId=generateSessionId();const urlParams=getURLParams();if(urlParams.name){clientName=urlParams.name;clientPhone=urlParams.phone;document.getElementById('userNameDisplay').textContent=' '+clientName}setupChannel(urlParams.source)}
+        
+        // ✅ NOUVELLE FONCTION : Vérifier dans Neon si déjà joué
+        async function checkIfAlreadyPlayed() {
+            // Si pas de nom ET pas de téléphone, on ne peut pas vérifier
+            if (!clientName && !clientPhone) {
+                return; // Continuer normalement
+            }
+            
+            try {
+                const response = await fetch('/api/check-participation', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ 
+                        clientName: clientName || '',
+                        clientPhone: clientPhone || ''
+                    })
+                });
+                
+                if (!response.ok) {
+                    console.error('Erreur vérification');
+                    return; // En cas d'erreur, laisser jouer
+                }
+                
+                const data = await response.json();
+                
+                if (data.hasPlayed && data.participation) {
+                    // ✅ Client a déjà joué ! Afficher l'écran "déjà joué"
+                    showAlreadyPlayedScreen(data.participation);
+                }
+                // Sinon, ne rien faire (l'écran d'accueil reste affiché)
+                
+            } catch (error) {
+                console.error('Erreur vérification:', error);
+                // En cas d'erreur, laisser jouer par sécurité
+            }
+        }
+        
+        // ✅ NOUVELLE FONCTION : Afficher l'écran "déjà joué"
+        function showAlreadyPlayedScreen(participation) {
+            // Cacher tous les autres écrans
+            document.getElementById('welcome-screen').classList.add('hidden');
+            document.getElementById('name-form-screen').classList.add('hidden');
+            document.getElementById('scratch-screen').classList.add('hidden');
+            
+            // Remplir les informations
+            document.getElementById('alreadyEmoji').textContent = participation.prizeEmoji;
+            document.getElementById('alreadyPrizeTitle').textContent = participation.prizeTitle;
+            document.getElementById('alreadyPromoCode').textContent = participation.promoCode;
+            
+            // Afficher l'écran
+            document.getElementById('already-played-screen').classList.remove('hidden');
+        }
+        
+        // ✅ FONCTION MODIFIÉE : Vérifier au chargement
+        window.onload=async function(){
+            sessionId=generateSessionId();
+            const urlParams=getURLParams();
+            if(urlParams.name){
+                clientName=urlParams.name;
+                clientPhone=urlParams.phone;
+                document.getElementById('userNameDisplay').textContent=' '+clientName
+            }
+            setupChannel(urlParams.source);
+            
+            // ✅ VÉRIFIER SI LE CLIENT A DÉJÀ JOUÉ
+            await checkIfAlreadyPlayed();
+        }
     </script>
 </body>
 </html>
