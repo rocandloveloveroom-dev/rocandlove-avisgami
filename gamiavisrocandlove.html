@@ -233,10 +233,10 @@
     <script>
         const CHANNELS={booking:{name:'Booking.com',icon:'🏨',buttonText:'Partager votre expérience sur Booking',storageKey:'rocLoveBookingUrl'},airbnb:{name:'Airbnb',icon:'🏠',buttonText:'Partager votre expérience sur Airbnb',storageKey:'rocLoveAirbnbUrl'},direct:{name:'Google',icon:'⭐',buttonText:'Partager votre expérience sur Google',storageKey:'rocLoveGoogleUrl'}};
         function loadPrizes(){const saved=localStorage.getItem('rocLovePrizes');return saved?JSON.parse(saved):[{id:1,title:'10% de réduction',description:'sur votre prochaine réservation',emoji:'🎫',probability:15,code:'ROCLOVE10'},{id:2,title:'15% de réduction',description:'sur votre prochaine réservation',emoji:'🎟️',probability:5,code:'ROCLOVE15'},{id:3,title:'Bouteille de Vouvray offerte',description:'lors de votre prochaine réservation',emoji:'🍾',probability:50,code:'ROCLOVEVV'},{id:4,title:'Love Box offerte',description:'lors de votre prochaine réservation',emoji:'💝',probability:30,code:'ROCLOVELB'}]}
-        const PRIZES=loadPrizes();let currentPrize=null,promoCode='',canvas,ctx,isScratching=false;let sessionId='',hasRevealed=false,clientName='',clientPhone='',reviewChannel='direct';
+        const PRIZES=loadPrizes();let currentPrize=null,promoCode='',canvas,ctx,isScratching=false;let sessionId='',hasRevealed=false,clientName='',clientPhone='',clientEmail='',reviewChannel='direct';
         function generateSessionId(){return'session_'+Date.now().toString(36)+Math.random().toString(36).substring(2)}
         function selectPrize(){const random=Math.random()*100;let cumulative=0;for(let prize of PRIZES){cumulative+=prize.probability;if(random<=cumulative)return prize}return PRIZES[0]}
-        function getURLParams(){const params=new URLSearchParams(window.location.search);return{name:params.get('n')||params.get('nom')||params.get('prenom')||'',phone:params.get('t')||params.get('tel')||params.get('telephone')||'',source:params.get('s')||params.get('source')||'direct'}}
+        function getURLParams(){const params=new URLSearchParams(window.location.search);return{name:params.get('n')||params.get('nom')||params.get('prenom')||'',phone:params.get('t')||params.get('tel')||params.get('telephone')||'',email:params.get('e')||params.get('email')||'',source:params.get('s')||params.get('source')||'direct'}}
         function setupChannel(source){reviewChannel=source;const channel=CHANNELS[source]||CHANNELS.direct;document.getElementById('reviewButtonText').textContent=`${channel.icon} ${channel.buttonText}`}
         function toggleAccessButton(){const checkbox=document.getElementById('reviewConfirm');const button=document.getElementById('accessButton');if(checkbox.checked){button.classList.remove('hidden');button.classList.add('fade-in')}else{button.classList.add('hidden')}}
         function goToReview(){const channel=CHANNELS[reviewChannel]||CHANNELS.direct;const reviewUrl=localStorage.getItem(channel.storageKey)||'https://www.google.com/maps';window.open(reviewUrl,'_blank');localStorage.setItem('rocLoveSession_'+sessionId,JSON.stringify({clickedReview:true,timestamp:new Date().toISOString(),channel:reviewChannel}))}
@@ -251,7 +251,8 @@
         function scratch(e){const{x,y}=getCoordinates(e);ctx.globalCompositeOperation='destination-out';ctx.beginPath();ctx.arc(x,y,30,0,Math.PI*2);ctx.fill();checkScratchProgress()}
         function checkScratchProgress(){if(hasRevealed)return;const imageData=ctx.getImageData(0,0,canvas.width,canvas.height);const pixels=imageData.data;let transparent=0;for(let i=3;i<pixels.length;i+=4){if(pixels[i]<128)transparent++}const scratchedPercent=(transparent/(pixels.length/4))*100;if(scratchedPercent>80)revealPrize()}
         async function saveToNeon(scratchData){try{const response=await fetch('/api/save-participation',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:scratchData.sessionId,clientName:scratchData.clientName,clientPhone:scratchData.clientPhone,prize:scratchData.prize,code:scratchData.code,channel:scratchData.channel})});if(!response.ok){console.error('Erreur sauvegarde Neon');return false}return true}catch(error){console.error('Erreur API:',error);return false}}
-        function revealPrize(){hasRevealed=true;ctx.clearRect(0,0,canvas.width,canvas.height);document.getElementById('copyBtnCard').classList.remove('hidden');const scratchData={sessionId,clientName,clientPhone,prize:currentPrize,code:promoCode,date:new Date().toISOString(),reviewClicked:true,scratched:true,channel:reviewChannel};saveToNeon(scratchData)}
+        async function sendEmail(emailData){if(!emailData.clientEmail){console.log('Pas d\'email fourni - email non envoyé');return false}try{const response=await fetch('/api/send-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({clientName:emailData.clientName,clientEmail:emailData.clientEmail,prizeEmoji:emailData.prize.emoji,prizeTitle:emailData.prize.title,prizeDescription:emailData.prize.description,promoCode:emailData.code})});if(!response.ok){console.error('Erreur envoi email');return false}const data=await response.json();console.log('✅ Email envoyé avec succès !',data);return true}catch(error){console.error('Erreur API email:',error);return false}}
+        function revealPrize(){hasRevealed=true;ctx.clearRect(0,0,canvas.width,canvas.height);document.getElementById('copyBtnCard').classList.remove('hidden');const scratchData={sessionId,clientName,clientPhone,clientEmail,prize:currentPrize,code:promoCode,date:new Date().toISOString(),reviewClicked:true,scratched:true,channel:reviewChannel};saveToNeon(scratchData);sendEmail(scratchData)}
         function copyCodeFromCard(){const code=document.getElementById('prizeCode').textContent;copyToClipboard(code);const button=document.getElementById('copyBtnCard');const originalText=button.innerHTML;button.innerHTML='✓ Copié !';setTimeout(()=>{button.innerHTML=originalText},2000)}
         function copyAlreadyCode(){const code=document.getElementById('alreadyPromoCode').textContent;copyToClipboard(code);const button=event.target;const originalText=button.innerHTML;button.innerHTML='✓ Copié !';setTimeout(()=>{button.innerHTML=originalText},2000)}
         function copyToClipboard(text){if(navigator.clipboard){navigator.clipboard.writeText(text)}else{const textarea=document.createElement('textarea');textarea.value=text;textarea.style.position='fixed';textarea.style.opacity='0';document.body.appendChild(textarea);textarea.select();document.execCommand('copy');document.body.removeChild(textarea)}}
@@ -259,73 +260,7 @@
         function showAdminLogin(){document.getElementById('adminLoginModal').classList.remove('hidden');document.getElementById('adminPassword').focus()}
         function closeAdminLogin(event){if(event&&event.target!==event.currentTarget)return;document.getElementById('adminLoginModal').classList.add('hidden');document.getElementById('adminPassword').value='';document.getElementById('loginError').classList.add('hidden')}
         function loginAdmin(){const password=document.getElementById('adminPassword').value;const savedPassword=localStorage.getItem('rocLoveAdminPassword')||'RocLove2025';if(password===savedPassword){window.location.href='./gamiavisadmin.html'}else{document.getElementById('loginError').classList.remove('hidden');setTimeout(()=>{document.getElementById('loginError').classList.add('hidden')},3000)}}
-        
-        // ✅ NOUVELLE FONCTION : Vérifier dans Neon si déjà joué
-        async function checkIfAlreadyPlayed() {
-            // Si pas de nom ET pas de téléphone, on ne peut pas vérifier
-            if (!clientName && !clientPhone) {
-                return; // Continuer normalement
-            }
-            
-            try {
-                const response = await fetch('/api/check-participation', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ 
-                        clientName: clientName || '',
-                        clientPhone: clientPhone || ''
-                    })
-                });
-                
-                if (!response.ok) {
-                    console.error('Erreur vérification');
-                    return; // En cas d'erreur, laisser jouer
-                }
-                
-                const data = await response.json();
-                
-                if (data.hasPlayed && data.participation) {
-                    // ✅ Client a déjà joué ! Afficher l'écran "déjà joué"
-                    showAlreadyPlayedScreen(data.participation);
-                }
-                // Sinon, ne rien faire (l'écran d'accueil reste affiché)
-                
-            } catch (error) {
-                console.error('Erreur vérification:', error);
-                // En cas d'erreur, laisser jouer par sécurité
-            }
-        }
-        
-        // ✅ NOUVELLE FONCTION : Afficher l'écran "déjà joué"
-        function showAlreadyPlayedScreen(participation) {
-            // Cacher tous les autres écrans
-            document.getElementById('welcome-screen').classList.add('hidden');
-            document.getElementById('name-form-screen').classList.add('hidden');
-            document.getElementById('scratch-screen').classList.add('hidden');
-            
-            // Remplir les informations
-            document.getElementById('alreadyEmoji').textContent = participation.prizeEmoji;
-            document.getElementById('alreadyPrizeTitle').textContent = participation.prizeTitle;
-            document.getElementById('alreadyPromoCode').textContent = participation.promoCode;
-            
-            // Afficher l'écran
-            document.getElementById('already-played-screen').classList.remove('hidden');
-        }
-        
-        // ✅ FONCTION MODIFIÉE : Vérifier au chargement
-        window.onload=async function(){
-            sessionId=generateSessionId();
-            const urlParams=getURLParams();
-            if(urlParams.name){
-                clientName=urlParams.name;
-                clientPhone=urlParams.phone;
-                document.getElementById('userNameDisplay').textContent=' '+clientName
-            }
-            setupChannel(urlParams.source);
-            
-            // ✅ VÉRIFIER SI LE CLIENT A DÉJÀ JOUÉ
-            await checkIfAlreadyPlayed();
-        }
+        window.onload=function(){sessionId=generateSessionId();const urlParams=getURLParams();if(urlParams.name){clientName=urlParams.name;clientPhone=urlParams.phone;clientEmail=urlParams.email;document.getElementById('userNameDisplay').textContent=' '+clientName}setupChannel(urlParams.source);console.log('✅ Client V4.2 - Email automatique activé')}
     </script>
 </body>
 </html>
