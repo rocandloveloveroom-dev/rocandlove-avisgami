@@ -66,7 +66,7 @@ export default async function handler(req, res) {
     console.log('✅ Lien court créé avec succès:', result[0]);
 
     const shortLink = result[0];
-    const baseUrl = 'https://rocandlove-avisgami.vercel.app';
+    const baseUrl = 'https://gami.rocandlove.fr';
     const shortUrl = `${baseUrl}/l/${code}`;
 
     res.status(200).json({ 
