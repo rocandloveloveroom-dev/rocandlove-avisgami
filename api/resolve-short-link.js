@@ -29,7 +29,7 @@ export default async function handler(req, res) {
     `;
 
     // Construire l'URL de destination
-    const baseUrl = 'https://rocandlove-avisgami.vercel.app';
+    const baseUrl = 'https://gami.rocandlove.fr';
     let destinationUrl = `${baseUrl}/?n=${encodeURIComponent(shortLink.client_name)}`;
     
     if (shortLink.client_phone) {
