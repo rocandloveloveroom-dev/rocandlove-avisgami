@@ -36,6 +36,10 @@ export default async function handler(req, res) {
       destinationUrl += `&t=${encodeURIComponent(shortLink.client_phone)}`;
     }
     
+    if (shortLink.client_email) {
+      destinationUrl += `&e=${encodeURIComponent(shortLink.client_email)}`;
+    }
+    
     destinationUrl += `&s=${shortLink.channel}`;
 
     // Redirection
