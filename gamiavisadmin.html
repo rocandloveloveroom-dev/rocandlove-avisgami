@@ -156,7 +156,7 @@
                     <div><label class="georgia text-sm text-gray-400 mb-2 block flex items-center gap-2"><span class="text-2xl">🏨</span> Lien Booking.com</label><input type="url" id="bookingUrl" class="input-field" placeholder="https://www.booking.com/reviewlist.html?pagename=..."/><p class="text-xs text-gray-500 mt-2">Lien vers votre page d'avis Booking</p></div>
                     <div><label class="georgia text-sm text-gray-400 mb-2 block flex items-center gap-2"><span class="text-2xl">🏠</span> Lien Airbnb</label><input type="url" id="airbnbUrl" class="input-field" placeholder="https://www.airbnb.fr/rooms/..."/><p class="text-xs text-gray-500 mt-2">Lien vers votre logement Airbnb</p></div>
                     <div><label class="georgia text-sm text-gray-400 mb-2 block flex items-center gap-2"><span class="text-2xl">⭐</span> Lien Google Reviews</label><input type="url" id="googleUrl" class="input-field" placeholder="https://g.page/r/..."/><p class="text-xs text-gray-500 mt-2">Lien vers votre page Google My Business</p></div>
-                    <div><label class="georgia text-sm text-gray-400 mb-2 block flex items-center gap-2"><span class="text-2xl">🌐</span> URL de votre site</label><input type="url" id="siteUrl" class="input-field" value="https://rocandlove-avisgami.vercel.app" readonly/><p class="text-xs text-gray-500 mt-2">URL complète de votre site (pour le générateur de liens)</p></div>
+                    <div><label class="georgia text-sm text-gray-400 mb-2 block flex items-center gap-2"><span class="text-2xl">🌐</span> URL de votre site</label><input type="url" id="siteUrl" class="input-field" value="https://gami.rocandlove.fr" readonly/><p class="text-xs text-gray-500 mt-2">URL complète de votre site (pour le générateur de liens)</p></div>
                 </div>
                 <button onclick="saveConfig()" class="cormorant w-full mt-6 py-3 px-6 rounded-xl font-bold text-black transition-all duration-300 hover:scale-105" style="background:linear-gradient(135deg,#B9A378 0%,#8B7355 100%)">💾 Sauvegarder la configuration</button>
             </div>
@@ -243,7 +243,7 @@
                   phone=document.getElementById('genPhone').value.trim(),
                   channel=document.getElementById('genChannel').value;
             if(!name){alert("Merci d'entrer le prénom du client");return}
-            const siteUrl='https://rocandlove-avisgami.vercel.app';
+            const siteUrl='https://gami.rocandlove.fr';
             let link=`${siteUrl}/?n=${encodeURIComponent(name)}`;
             phone&&(link+=`&t=${encodeURIComponent(phone)}`);
             link+=`&s=${channel}`;
@@ -580,7 +580,7 @@
             return;
         }
         
-        const siteUrl = 'https://rocandlove-avisgami.vercel.app';
+        const siteUrl = 'https://gami.rocandlove.fr';
         let link = `${siteUrl}/?n=${encodeURIComponent(name)}`;
         
         if (phone) {
