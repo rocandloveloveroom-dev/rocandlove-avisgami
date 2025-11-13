@@ -70,6 +70,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                             <div><label class="georgia text-sm text-gray-400 mb-2 block">Prénom du client</label><input type="text" id="genName" class="input-field" placeholder="Marie"/></div>
                             <div><label class="georgia text-sm text-gray-400 mb-2 block">Téléphone (optionnel)</label><input type="tel" id="genPhone" class="input-field" placeholder="0612345678"/></div>
+                            <div><label class="georgia text-sm text-gray-400 mb-2 block">Email du client</label><input type="email" id="genEmail" class="input-field" placeholder="client@exemple.com"/></div>
                         </div>
                         <div class="mb-6">
                             <label class="georgia text-sm text-gray-400 mb-2 block">Plateforme de réservation</label>
@@ -241,11 +242,13 @@
         function generateLink(){
             const name=document.getElementById('genName').value.trim(),
                   phone=document.getElementById('genPhone').value.trim(),
+                  email=document.getElementById('genEmail').value.trim(),
                   channel=document.getElementById('genChannel').value;
             if(!name){alert("Merci d'entrer le prénom du client");return}
             const siteUrl='https://gami.rocandlove.fr';
             let link=`${siteUrl}/?n=${encodeURIComponent(name)}`;
             phone&&(link+=`&t=${encodeURIComponent(phone)}`);
+            email&&(link+=`&e=${encodeURIComponent(email)}`);
             link+=`&s=${channel}`;
             document.getElementById('generatedLink').value=link;
             document.getElementById('generatedResult').classList.remove('hidden');
