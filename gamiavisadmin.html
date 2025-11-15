@@ -244,11 +244,17 @@
                   phone=document.getElementById('genPhone').value.trim(),
                   email=document.getElementById('genEmail').value.trim(),
                   channel=document.getElementById('genChannel').value;
+
+                  console.log('DEBUG email capturé:', email);
+      
             if(!name){alert("Merci d'entrer le prénom du client");return}
             const siteUrl='https://gami.rocandlove.fr';
             let link=`${siteUrl}/?n=${encodeURIComponent(name)}`;
             phone&&(link+=`&t=${encodeURIComponent(phone)}`);
             email&&(link+=`&e=${encodeURIComponent(email)}`);
+      
+            console.log('DEBUG lien après email:', link);
+      
             link+=`&s=${channel}`;
             document.getElementById('generatedLink').value=link;
             document.getElementById('generatedResult').classList.remove('hidden');
