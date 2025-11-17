@@ -33,10 +33,12 @@ export default async function handler(req, res) {
     const maxAttempts = 10;
 
     while (!isUnique && attempts < maxAttempts) {
+      // Générer un code aléatoire de 5 caractères (lettres + chiffres)
       code = Math.random().toString(36).substring(2, 7).toLowerCase();
       
       console.log(`🔍 Test code: ${code} (tentative ${attempts + 1})`);
       
+      // Vérifier si le code existe déjà
       const existing = await sql`
         SELECT code FROM short_links WHERE code = ${code}
       `;
