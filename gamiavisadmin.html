@@ -70,7 +70,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                             <div><label class="georgia text-sm text-gray-400 mb-2 block">Prénom du client</label><input type="text" id="genName" class="input-field" placeholder="Marie"/></div>
                             <div><label class="georgia text-sm text-gray-400 mb-2 block">Téléphone (optionnel)</label><input type="tel" id="genPhone" class="input-field" placeholder="0612345678"/></div>
-                            <div><label class="georgia text-sm text-gray-400 mb-2 block">Email du client</label><input type="text" id="genEmail" class="input-field" placeholder="client@exemple.com"/></div>
+                            <div><label class="georgia text-sm text-gray-400 mb-2 block">Email du client (optionnel)</label><input type="email" id="genEmail" class="input-field" placeholder="client@exemple.com"/></div>
                         </div>
                         <div class="mb-6">
                             <label class="georgia text-sm text-gray-400 mb-2 block">Plateforme de réservation</label>
@@ -80,7 +80,8 @@
                                 <option value="airbnb">🏠 Airbnb</option>
                             </select>
                         </div>
-                        <button onclick="generateLink()" class="cormorant w-full py-4 px-6 rounded-xl font-bold text-xl text-black transition-all duration-300 hover:scale-105" style="background:linear-gradient(135deg,#B9A378 0%,#8B7355 100%)">🪄 Générer le lien et le QR Code</button>
+                        <button onclick="generateShortLink()" id="generateBtn" class="cormorant w-full py-4 px-6 rounded-xl font-bold text-xl text-black transition-all duration-300 hover:scale-105" style="background:linear-gradient(135deg,#B9A378 0%,#8B7355 100%)">🪄 Générer le lien court</button>
+<p class="text-xs text-gray-500 text-center mt-2">✨ Lien court = plus professionnel en SMS</p>
                     </div>
                     <div id="generatedResult" class="hidden">
                         <div class="bg-gradient-to-br from-gray-900 to-black border-2 border-yellow-700 rounded-2xl p-6 mb-6">
