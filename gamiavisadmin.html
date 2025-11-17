@@ -712,6 +712,49 @@
         }
     };
 
+     // 📲 Copier un SMS prêt à envoyer
+window.copySmsText = function() {
+    const name = (document.getElementById('genName').value || '').trim();
+    const email = (document.getElementById('genEmail').value || '').trim();
+    const shortInput = document.getElementById('shortLinkInput');
+    const shortUrl = (shortInput && shortInput.value || '').trim();
+
+    if (!shortUrl) {
+        alert('Génère d\'abord un lien court avant de copier le SMS.');
+        return;
+    }
+
+    if (!name) {
+        alert('Merci d’indiquer le prénom du client pour personnaliser le SMS.');
+        return;
+    }
+
+    if (!email) {
+        alert('L’email est obligatoire pour le jeu (envoi du code par mail). Merci de le renseigner.');
+        return;
+    }
+
+    const firstName = name;
+
+    const message =
+`Bonjour ${firstName}, merci pour votre séjour chez Roc & Love 💛
+Laissez-nous un petit avis et découvrez votre cadeau 🎁 : ${shortUrl}
+Merci pour votre soutien 🥰
+Gwen & Val – Roc & Love`;
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(message)
+            .then(() => {
+                alert('SMS copié ✅ Tu peux maintenant le coller dans ton application de SMS 📲');
+            })
+            .catch(() => {
+                alert('Impossible de copier automatiquement. Sélectionne le texte du SMS manuellement.');
+            });
+    } else {
+        alert('Ton navigateur ne permet pas la copie automatique. Il faudra saisir le SMS manuellement.');
+    }
+};
+
     // 📥 Télécharger le QR code
     window.downloadQRCode = function() {
         if (!currentQRCodeUrl) {
