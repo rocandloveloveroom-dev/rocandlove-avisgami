@@ -10,68 +10,165 @@
         @font-face{font-family:'Brittany Signature';src:url('./assets/BrittanySignature.ttf') format('truetype')}
         .brittany{font-family:'Brittany Signature',cursive}.georgia{font-family:Georgia,serif}.cormorant{font-family:'Cormorant Garamond',serif}
         .blur-bubble{position:fixed;width:24rem;height:24rem;border-radius:50%;filter:blur(80px);opacity:.2;pointer-events:none}
-        .stat-card{background:linear-gradient(135deg,rgba(185,163,120,.1) 0%,rgba(139,115,85,.1) 100%);border:1px solid rgba(185,163,120,.3);border-radius:1rem;padding:1.5rem;transition:all .3s}
+        .stat-card{background:linear-gradient(135deg,rgba(185,163,120,.1),rgba(15,23,42,.9));border:1px solid rgba(185,163,120,.3);border-radius:1rem;padding:1.5rem;transition:all .3s}
         .stat-card:hover{border-color:rgba(185,163,120,.6);transform:translateY(-2px)}
-        .code-badge{display:inline-block;padding:.25rem .75rem;border-radius:.5rem;font-family:'Courier New',monospace;font-weight:700;font-size:.875rem}
+        .code-badge{display:inline-block;padding:.25rem .75rem;border-radius:999px;background:rgba(15,23,42,.9);border:1px solid rgba(148,163,184,.4);font-family:'Courier New',monospace;font-weight:700;font-size:.875rem}
         .code-ROCLOVE10{background:rgba(96,165,250,.2);color:#60a5fa}.code-ROCLOVE15{background:rgba(139,92,246,.2);color:#8b5cf6}
-        .code-ROCLOVEVV{background:rgba(251,146,60,.2);color:#fb923c}.code-ROCLOVELB{background:rgba(236,72,153,.2);color:#ec4899}
-        .channel-badge{display:inline-block;padding:.25rem .75rem;border-radius:.5rem;font-size:.75rem;font-weight:600}
-        .channel-booking{background:rgba(0,108,228,.2);color:#006CE4}.channel-airbnb{background:rgba(255,90,95,.2);color:#FF5A5F}.channel-direct{background:rgba(185,163,120,.2);color:#B9A378}
-        .input-field{width:100%;padding:12px;border:2px solid #B9A378;border-radius:8px;background:rgba(255,255,255,.05);color:#fff;font-family:Georgia,serif}
-        .input-field:focus{outline:0;border-color:#DCD1BC;background:rgba(255,255,255,.1)}
-        select.input-field{cursor:pointer}
-        .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center;z-index:9999}
-        .hidden{display:none!important}
-        table{width:100%;border-collapse:collapse}
-        th{background:rgba(185,163,120,.1);padding:12px;text-align:left;font-weight:600;border-bottom:2px solid rgba(185,163,120,.3)}
-        td{padding:12px;border-bottom:1px solid rgba(185,163,120,.1)}
-        tr:hover{background:rgba(185,163,120,.05)}
-        .tab-button{padding:.75rem 1.5rem;border-radius:.5rem;transition:all .3s;cursor:pointer}
-        .tab-button.active{background:linear-gradient(135deg,#B9A378 0%,#8B7355 100%);color:#000}
-        .tab-button:not(.active){color:#B9A378;border:1px solid rgba(185,163,120,.3)}
-        .tab-button:not(.active):hover{background:rgba(185,163,120,.1)}
-        #qrcodeCanvas{margin:0 auto;border:4px solid #B9A378;border-radius:1rem;padding:1rem;background:#fff}
-        .refresh-btn{animation:fadeIn 0.3s ease-in}
-        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+        .code-ROCLOVE20{background:rgba(52,211,153,.2);color:#34d399}.code-ROCLOVECHAMP{background:rgba(251,191,36,.15);color:#fbbf24}
+        .tab-button{padding:.75rem 1.5rem;border-radius:999px;border:1px solid rgba(148,163,184,.4);background:rgba(15,23,42,.8);color:#e5e7eb;font-size:.95rem;transition:all .2s}
+        .tab-button:hover{border-color:#b9a378;color:#fef3c7;transform:translateY(-1px)}
+        .tab-button.active{background:linear-gradient(135deg,#b9a378,#8b7355);color:#111827;border-color:transparent}
+        .input-field{width:100%;padding:.6rem .75rem;border-radius:.75rem;background:rgba(15,23,42,.9);border:1px solid rgba(148,163,184,.5);color:#e5e7eb;font-size:.9rem}
+        .input-field:focus{outline:none;border-color:#b9a378;box-shadow:0 0 0 1px rgba(185,163,120,.3)}
+        .badge{display:inline-flex;align-items:center;gap:.35rem;padding:.25rem .6rem;border-radius:999px;font-size:.75rem;border:1px solid rgba(148,163,184,.5);background:rgba(15,23,42,.8)}
+        .badge-dot{width:.5rem;height:.5rem;border-radius:999px}
+        .badge-direct{border-color:rgba(52,211,153,.6);background:rgba(6,95,70,.3)}.badge-direct .badge-dot{background:#22c55e}
+        .badge-booking{border-color:rgba(59,130,246,.6);background:rgba(30,64,175,.3)}.badge-booking .badge-dot{background:#3b82f6}
+        .badge-airbnb{border-color:rgba(244,114,182,.6);background:rgba(159,18,57,.3)}.badge-airbnb .badge-dot{background:#f97316}
+        table th,table td{padding:.6rem .75rem;border-bottom:1px solid rgba(31,41,55,.9)}table th{font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:#9ca3af}
+        table tbody tr:nth-child(even){background:rgba(15,23,42,.7)}table tbody tr:hover{background:rgba(31,41,55,.95)}
+        .prize-card{border-radius:1rem;background:linear-gradient(135deg,rgba(15,23,42,.95),rgba(17,24,39,.98));border:1px solid rgba(75,85,99,.8);padding:1.25rem;transition:all .2s}
+        .prize-card:hover{border-color:#b9a378;transform:translateY(-1px)}
+        .switch{position:relative;display:inline-block;width:46px;height:24px}
+        .switch input{opacity:0;width:0;height:0}
+        .slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background-color:#4b5563;transition:.2s;border-radius:999px}
+        .slider:before{position:absolute;content:"";height:18px;width:18px;left:3px;bottom:3px;background-color:white;transition:.2s;border-radius:50%}
+        input:checked+.slider{background-color:#b9a378}
+        input:checked+.slider:before{transform:translateX(22px)}
+        .pill{display:inline-flex;align-items:center;gap:.35rem;padding:.2rem .7rem;border-radius:999px;font-size:.7rem;border:1px solid rgba(148,163,184,.5);background:rgba(15,23,42,.85)}
+        .pill-label{color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;font-size:.65rem}
+        details summary::-webkit-details-marker{display:none}
+        details summary{list-style:none}
     </style>
 </head>
-<body class="bg-black text-white min-h-screen">
-    <div class="blur-bubble bg-yellow-900 top-0 left-0"></div>
-    <div class="blur-bubble bg-yellow-900 bottom-0 right-0"></div>
-    
-    <div class="relative z-10 container mx-auto px-4 py-8 max-w-7xl">
-        <div class="bg-gradient-to-br from-gray-900 to-black border border-yellow-900/30 rounded-2xl p-6 sm:p-8 shadow-2xl mb-8">
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div>
-                    <h1 class="brittany text-4xl sm:text-5xl mb-2" style="color:#B9A378">Dashboard Admin</h1>
-                    <p class="georgia text-gray-400">Gestion multi-canal de la gamification</p>
-                </div>
-                <div class="flex gap-3">
-                    <button onclick="refreshData()" class="cormorant py-2 px-4 rounded-lg font-bold text-sm border-2 border-yellow-700 text-white transition-all duration-300 hover:bg-yellow-900/20" title="Actualiser les données">🔄 Actualiser</button>
-                    <button onclick="showPasswordModal()" class="cormorant py-2 px-4 rounded-lg font-bold text-sm border-2 border-yellow-700 text-white transition-all duration-300 hover:bg-yellow-900/20">🔒 Mot de passe</button>
-                    <button onclick="exportData()" class="cormorant py-2 px-4 rounded-lg font-bold text-sm text-black transition-all duration-300 hover:scale-105" style="background:linear-gradient(135deg,#B9A378 0%,#8B7355 100%)">📥 Export CSV</button>
+<body class="bg-slate-950 text-gray-100 min-h-screen relative overflow-x-hidden">
+    <div class="blur-bubble" style="top:-8rem;left:-6rem;background:radial-gradient(circle,#b9a378,transparent)"></div>
+    <div class="blur-bubble" style="bottom:-10rem;right:-4rem;background:radial-gradient(circle,#6366f1,transparent)"></div>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-4 py-10">
+        <header class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+            <div>
+                <h1 class="brittany text-4xl sm:text-5xl" style="color:#B9A378">Roc & Love</h1>
+                <p class="georgia text-sm text-gray-400 mt-1">Dashboard de gamification des avis 💌</p>
+            </div>
+            <div class="text-right">
+                <p class="georgia text-xs text-gray-400 mb-1">Mode Admin sécurisé</p>
+                <div class="inline-flex items-center gap-2 px-3 py-2 rounded-full border border-emerald-500/40 bg-emerald-900/20">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span class="georgia text-xs text-emerald-200">En ligne</span>
                 </div>
             </div>
-        </div>
+        </header>
+
+        <main class="space-y-8">
+            <section class="grid md:grid-cols-[2fr,1.3fr] gap-6 mb-6">
+                <div class="stat-card">
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <p class="georgia text-xs text-gray-400 uppercase tracking-wide">Avis collectés</p>
+                            <p class="georgia text-3xl font-bold mt-1" id="totalReviews">–</p>
+                        </div>
+                        <span class="text-3xl">💌</span>
+                    </div>
+                    <p class="georgia text-xs text-gray-400">Nombre total de participations au jeu via la page Roc & Love.</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <p class="georgia text-xs text-gray-400 uppercase tracking-wide">Taux de clics</p>
+                            <p class="georgia text-3xl font-bold mt-1" id="clickRate">–</p>
+                        </div>
+                        <span class="text-3xl">✨</span>
+                    </div>
+                    <p class="georgia text-xs text-gray-400">Part des clients ayant cliqué pour laisser un avis.</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <p class="georgia text-xs text-gray-400 uppercase tracking-wide">Avis Google directs</p>
+                            <p class="georgia text-3xl font-bold mt-1" id="googleReviews">–</p>
+                        </div>
+                        <span class="text-3xl">⭐</span>
+                    </div>
+                    <p class="georgia text-xs text-gray-400">Part de clients venant directement sur Google.</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <p class="georgia text-xs text-gray-400 uppercase tracking-wide">Taux de grattage</p>
+                            <p class="georgia text-3xl font-bold mt-1" id="scratchRate">–</p>
+                        </div>
+                        <span class="text-3xl">🎁</span>
+                    </div>
+                    <p class="georgia text-xs text-gray-400">Clients qui vont au bout du jeu et découvrent leur cadeau.</p>
+                </div>
+            </section>
+
+            <section class="bg-slate-950/70 border border-yellow-900/40 rounded-3xl p-4 sm:p-5 mb-6">
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-yellow-500/70 to-amber-700/70 flex items-center justify-center shadow-lg shadow-yellow-900/40">
+                            <span class="text-2xl">🎯</span>
+                        </div>
+                        <div>
+                            <p class="georgia text-xs text-gray-400 uppercase tracking-wide">Vue d'ensemble</p>
+                            <p class="georgia text-sm text-gray-200">Génère tes liens, suis les avis et récompenses de tes clients.</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <div class="pill">
+                            <span class="pill-label">Google Direct</span>
+                            <span>⭐</span>
+                        </div>
+                        <div class="pill">
+                            <span class="pill-label">Plateformes</span>
+                            <span>🏨 Booking • 🏠 Airbnb</span>
+                        </div>
+                        <div class="pill">
+                            <span class="pill-label">Jeu</span>
+                            <span>Carte à gratter 🎲</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-slate-950/70 border border-yellow-900/40 rounded-3xl p-4 sm:p-5">
+                <div class="flex gap-3 mb-8 flex-wrap">
+                    <button onclick="showTab('generator')" id="tab-generator" class="tab-button active cormorant font-bold">🪄 Générateur</button>
+                    <button onclick="showTab('stats')" id="tab-stats" class="tab-button cormorant font-bold">📊 Stats</button>
+                    <button onclick="showTab('prizes')" id="tab-prizes" class="tab-button cormorant font-bold">🎁 Lots</button>
+                    <button onclick="showTab('history')" id="tab-history" class="tab-button cormorant font-bold">📋 Historique</button>
+                    <button onclick="showTab('config')" id="tab-config" class="tab-button cormorant font-bold">⚙️ Config</button>
+                </div>
         
-        <div class="flex gap-3 mb-8 flex-wrap">
-            <button onclick="showTab('generator')" id="tab-generator" class="tab-button active cormorant font-bold">🪄 Générateur</button>
-            <button onclick="showTab('stats')" id="tab-stats" class="tab-button cormorant font-bold">📊 Stats</button>
-            <button onclick="showTab('prizes')" id="tab-prizes" class="tab-button cormorant font-bold">🎁 Lots</button>
-            <button onclick="showTab('history')" id="tab-history" class="tab-button cormorant font-bold">📋 Historique</button>
-            <button onclick="showTab('config')" id="tab-config" class="tab-button cormorant font-bold">⚙️ Config</button>
-        </div>
-        
+        <!-- Générateur -->
         <div id="content-generator" class="tab-content">
             <div class="bg-gradient-to-br from-gray-900 to-black border border-yellow-900/30 rounded-2xl p-6 sm:p-8 shadow-2xl">
                 <h2 class="brittany text-3xl mb-6 text-center" style="color:#B9A378">🪄 Générateur de Liens Personnalisés</h2>
-                <div class="max-w-2xl mx-auto">
-                    <div class="bg-yellow-900/20 border border-yellow-700/30 rounded-xl p-6 mb-8">
+
+                <!-- Layout 2 colonnes sur grand écran -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                    
+                    <!-- Colonne gauche : infos client + bouton générer -->
+                    <div class="bg-yellow-900/20 border border-yellow-700/30 rounded-xl p-6">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                            <div><label class="georgia text-sm text-gray-400 mb-2 block">Prénom du client</label><input type="text" id="genName" class="input-field" placeholder="Marie"/></div>
-                            <div><label class="georgia text-sm text-gray-400 mb-2 block">Téléphone (optionnel)</label><input type="tel" id="genPhone" class="input-field" placeholder="0612345678"/></div>
-                            <div><label class="georgia text-sm text-gray-400 mb-2 block">Email du client (optionnel)</label><input type="email" id="genEmail" class="input-field" placeholder="client@exemple.com"/></div>
+                            <div>
+                                <label class="georgia text-sm text-gray-400 mb-2 block">Prénom du client</label>
+                                <input type="text" id="genName" class="input-field" placeholder="Marie"/>
+                            </div>
+                            <div>
+                                <label class="georgia text-sm text-gray-400 mb-2 block">Téléphone</label>
+                                <input type="tel" id="genPhone" class="input-field" placeholder="0612345678"/>
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label class="georgia text-sm text-gray-400 mb-2 block">Email du client</label>
+                                <input type="email" id="genEmail" class="input-field" placeholder="client@exemple.com"/>
+                            </div>
                         </div>
+
                         <div class="mb-6">
                             <label class="georgia text-sm text-gray-400 mb-2 block">Plateforme de réservation</label>
                             <select id="genChannel" class="input-field">
@@ -80,158 +177,357 @@
                                 <option value="airbnb">🏠 Airbnb</option>
                             </select>
                         </div>
-                        <button onclick="generateShortLink()" id="generateBtn" class="cormorant w-full py-4 px-6 rounded-xl font-bold text-xl text-black transition-all duration-300 hover:scale-105" style="background:linear-gradient(135deg,#B9A378 0%,#8B7355 100%)">🪄 Générer le lien court</button>
-<p class="text-xs text-gray-500 text-center mt-2">✨ Lien court = plus professionnel en SMS</p>
+
+                        <button onclick="generateShortLink()" id="generateBtn"
+                                class="cormorant w-full py-4 px-6 rounded-xl font-bold text-xl text-black transition-all duration-300 hover:scale-105"
+                                style="background:linear-gradient(135deg,#B9A378 0%,#8B7355 100%)">
+                            🪄 Générer le lien court
+                        </button>
+                        <p class="text-xs text-gray-500 text-center mt-2">
+                            ✨ Lien court = plus professionnel en SMS
+                        </p>
                     </div>
-                   <div id="generatedResult" class="hidden">
-    <div class="bg-gradient-to-br from-gray-900 to-black border-2 border-yellow-700 rounded-2xl p-6 mb-6">
-        <h3 class="georgia font-bold text-xl mb-4 text-center" style="color:#B9A378">📱 Liens d'avis</h3>
 
-        <!-- Lien court -->
-        <div class="bg-black/30 rounded-xl p-4 mb-4">
-            <p class="text-sm text-gray-400 mb-2">Lien court (à envoyer en SMS) :</p>
-            <div class="flex gap-2">
-                <input type="text" id="shortLinkInput" class="input-field text-sm" readonly/>
-                <button onclick="copyShortLink()" class="cormorant py-2 px-4 rounded-lg font-bold text-sm text-black transition-all duration-300 hover:scale-105" style="background:linear-gradient(135deg,#B9A378 0%,#8B7355 100%)">📋</button>
-            </div>
-            <p class="georgia text-xs text-center text-gray-500 mt-2">✨ C’est ce lien qui part dans le SMS</p>
-        </div>
+                    <!-- Colonne droite : résultats -->
+                    <div id="generatedResult" class="hidden">
+                        <div class="bg-gradient-to-br from-gray-900 to-black border-2 border-yellow-700 rounded-2xl p-6 mb-6">
+                            <h3 class="georgia font-bold text-xl mb-4 text-center" style="color:#B9A378">📱 Liens d'avis</h3>
 
-        <button type="button"
-        onclick="copySmsText()"
-        class="cormorant w-full mt-2 py-3 px-4 rounded-lg font-bold text-sm text-black transition-all duration-300 hover:scale-105"
-        style="background:linear-gradient(135deg,#F5E3C3 0%,#B9A378 100%);">
-    📲 Copier le SMS prêt à envoyer
-</button>
+                            <!-- Lien court -->
+                            <div class="bg-black/30 rounded-xl p-4 mb-4">
+                                <p class="text-sm text-gray-400 mb-2">Lien court (à envoyer en SMS) :</p>
+                                <div class="flex gap-2">
+                                    <input type="text" id="shortLinkInput" class="input-field text-sm" readonly/>
+                                    <button onclick="copyShortLink()"
+                                            class="cormorant py-2 px-4 rounded-lg font-bold text-sm text-black transition-all duration-300 hover:scale-105"
+                                            style="background:linear-gradient(135deg,#B9A378 0%,#8B7355 100%)">
+                                        📋
+                                    </button>
+                                </div>
+                                <p class="georgia text-xs text-center text-gray-500 mt-2">
+                                    ✨ C’est ce lien qui part dans le SMS
+                                </p>
+                            </div>
 
-        <!-- Lien long en option -->
-        <details class="mt-2">
-            <summary class="georgia text-sm text-gray-400 cursor-pointer">Afficher le lien long (optionnel)</summary>
-            <div class="mt-3 bg-black/30 rounded-xl p-4">
-                <p class="text-sm text-gray-400 mb-2">Lien long complet :</p>
-                <div class="flex gap-2">
-                    <input type="text" id="longLinkInput" class="input-field text-xs" readonly/>
-                    <button onclick="copyLongLink()" class="cormorant py-2 px-4 rounded-lg font-bold text-sm text-black transition-all duration-300 hover:scale-105" style="background:linear-gradient(135deg,#B9A378 0%,#8B7355 100%)">📋</button>
+                            <!-- Bouton SMS -->
+                            <button type="button"
+                                    onclick="copySmsText()"
+                                    class="cormorant w-full mt-2 py-3 px-4 rounded-lg font-bold text-sm text-black transition-all duration-300 hover:scale-105"
+                                    style="background:linear-gradient(135deg,#F5E3C3 0%,#B9A378 100%);">
+                                📲 Copier le SMS prêt à envoyer
+                            </button>
+
+                            <!-- Lien long en option -->
+                            <details class="mt-4">
+                                <summary class="georgia text-sm text-gray-400 cursor-pointer">
+                                    Afficher le lien long (optionnel)
+                                </summary>
+                                <div class="mt-3 bg-black/30 rounded-xl p-4">
+                                    <p class="text-sm text-gray-400 mb-2">Lien long complet :</p>
+                                    <div class="flex gap-2">
+                                        <input type="text" id="longLinkInput" class="input-field text-xs" readonly/>
+                                        <button onclick="copyLongLink()"
+                                                class="cormorant py-2 px-4 rounded-lg font-bold text-sm text-black transition-all duration-300 hover:scale-105"
+                                                style="background:linear-gradient(135deg,#B9A378 0%,#8B7355 100%)">
+                                            📋
+                                        </button>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+
+                        <!-- Bloc QR code -->
+                        <div class="bg-gradient-to-br from-gray-900 to-black border-2 border-yellow-700 rounded-2xl p-6">
+                            <h3 class="georgia font-bold text-xl mb-4 text-center" style="color:#B9A378">📸 QR Code</h3>
+                            <div class="flex justify-center mb-4">
+                                <div id="qrcodeCanvas"></div>
+                            </div>
+                            <div class="flex gap-3">
+                                <button onclick="downloadQRCode()"
+                                        class="cormorant flex-1 py-3 px-6 rounded-xl font-bold text-black transition-all duration-300 hover:scale-105"
+                                        style="background:linear-gradient(135deg,#B9A378 0%,#8B7355 100%)">
+                                    📥 Télécharger
+                                </button>
+                                <button onclick="printQRCode()"
+                                        class="cormorant flex-1 py-3 px-6 rounded-xl font-bold border-2 border-yellow-700 text-white transition-all duration-300 hover:bg-yellow-900/20">
+                                    🖨️ Imprimer
+                                </button>
+                            </div>
+                            <p class="georgia text-xs text-center text-gray-500 mt-4">
+                                💡 Imprimez et laissez le QR Code dans la chambre !
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-        </details>
-    </div>
+        </div>
 
-    <!-- Bloc QR code déjà présent, on le garde -->
-    <div class="bg-gradient-to-br from-gray-900 to-black border-2 border-yellow-700 rounded-2xl p-6">
-        <h3 class="georgia font-bold text-xl mb-4 text-center" style="color:#B9A378">📸 QR Code</h3>
-        <div class="flex justify-center mb-4">
-            <div id="qrcodeCanvas"></div>
-        </div>
-        <div class="flex gap-3">
-            <button onclick="downloadQRCode()" class="cormorant flex-1 py-3 px-6 rounded-xl font-bold text-black transition-all duration-300 hover:scale-105" style="background:linear-gradient(135deg,#B9A378 0%,#8B7355 100%)">📥 Télécharger</button>
-            <button onclick="printQRCode()" class="cormorant flex-1 py-3 px-6 rounded-xl font-bold border-2 border-yellow-700 text-white transition-all duration-300 hover:bg-yellow-900/20">🖨️ Imprimer</button>
-        </div>
-        <p class="georgia text-xs text-center text-gray-500 mt-4">💡 Imprimez et laissez le QR Code dans la chambre !</p>
-    </div>
-</div>
-
-                </div>
-            </div>
-        </div>
-        
+        <!-- Stats -->
         <div id="content-stats" class="tab-content hidden">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                <div class="stat-card"><div class="text-gray-400 text-sm mb-1">Total participations</div><div class="text-3xl font-bold" style="color:#B9A378" id="totalParticipations">0</div></div>
-                <div class="stat-card"><div class="text-gray-400 text-sm mb-1">Avis cliqués</div><div class="text-3xl font-bold" style="color:#B9A378" id="totalReviews">0</div></div>
-                <div class="stat-card"><div class="text-gray-400 text-sm mb-1">Taux de conversion</div><div class="text-3xl font-bold" style="color:#B9A378" id="conversionRate">0%</div></div>
-                <div class="stat-card"><div class="text-gray-400 text-sm mb-1">Codes utilisés</div><div class="text-3xl font-bold" style="color:#B9A378" id="codesUsed">0</div></div>
-            </div>
-            <div class="bg-gradient-to-br from-gray-900 to-black border border-yellow-900/30 rounded-2xl p-6 sm:p-8 shadow-2xl mb-8">
-                <h2 class="brittany text-3xl mb-6" style="color:#B9A378">Statistiques par canal</h2>
-                <div id="channelStats" class="grid grid-cols-1 sm:grid-cols-3 gap-4"></div>
-            </div>
             <div class="bg-gradient-to-br from-gray-900 to-black border border-yellow-900/30 rounded-2xl p-6 sm:p-8 shadow-2xl">
-                <h2 class="brittany text-3xl mb-6" style="color:#B9A378">Distribution des codes</h2>
-                <div id="prizesStats" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
-            </div>
-        </div>
-        
-        <div id="content-prizes" class="tab-content hidden">
-            <div class="bg-gradient-to-br from-gray-900 to-black border border-yellow-900/30 rounded-2xl p-6 sm:p-8 shadow-2xl mb-6">
-                <div class="flex items-center justify-between mb-6">
-                    <h2 class="brittany text-3xl" style="color:#B9A378">Configuration des lots</h2>
-                    <button onclick="showAddPrizeModal()" class="cormorant py-2 px-4 rounded-lg font-bold text-sm text-black transition-all duration-300 hover:scale-105" style="background:linear-gradient(135deg,#B9A378 0%,#8B7355 100%)">➕ Ajouter un lot</button>
+                <h2 class="brittany text-3xl mb-6" style="color:#B9A378">Statistiques détaillées</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-slate-900/70 border border-slate-700/60 rounded-2xl p-4">
+                        <h3 class="georgia font-semibold text-sm mb-3 text-gray-200">Répartition des canaux</h3>
+                        <div class="space-y-2 text-xs georgia">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="badge-direct badge-dot"></span>
+                                    <span>Google direct</span>
+                                </div>
+                                <span id="statsDirect">–</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="badge-booking badge-dot"></span>
+                                    <span>Booking.com</span>
+                                </div>
+                                <span id="statsBooking">–</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="badge-airbnb badge-dot"></span>
+                                    <span>Airbnb</span>
+                                </div>
+                                <span id="statsAirbnb">–</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900/70 border border-slate-700/60 rounded-2xl p-4">
+                        <h3 class="georgia font-semibold text-sm mb-3 text-gray-200">Parcours du jeu</h3>
+                        <div class="space-y-2 text-xs georgia">
+                            <div class="flex items-center justify-between">
+                                <span>Clients ayant cliqué sur un bouton d'avis</span>
+                                <span id="statsReviewClicks">–</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span>Clients ayant gratté leur cadeau</span>
+                                <span id="statsScratch">–</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900/70 border border-slate-700/60 rounded-2xl p-4 md:col-span-2">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="georgia font-semibold text-sm text-gray-200">Export des données</h3>
+                            <button onclick="exportData()" class="cormorant px-4 py-2 rounded-lg border border-yellow-700/60 text-xs hover:bg-yellow-900/30 transition">
+                                📥 Télécharger l'export CSV
+                            </button>
+                        </div>
+                        <p class="georgia text-xs text-gray-400">
+                            L'export CSV contient l'ensemble des participations : clients, canaux, lots, codes, clics sur les avis, etc.
+                        </p>
+                    </div>
                 </div>
-                <div id="prizesList" class="space-y-4"></div>
             </div>
         </div>
-        
+
+        <!-- Lots -->
+        <div id="content-prizes" class="tab-content hidden">
+            <div class="bg-gradient-to-br from-gray-900 to-black border border-yellow-900/30 rounded-2xl p-6 sm:p-8 shadow-2xl">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                    <h2 class="brittany text-3xl" style="color:#B9A378">Gestion des lots</h2>
+                    <p class="georgia text-xs text-gray-400 max-w-md">
+                        Définis les cadeaux que tes clients peuvent gagner après avoir laissé un avis.
+                        Chaque lot peut avoir un nombre d'occurrences et une probabilité personnalisée.
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-[1.8fr,1.2fr] gap-6">
+                    <div>
+                        <div id="prizeList" class="grid md:grid-cols-2 gap-4 mb-6"></div>
+                        <button onclick="addPrize()" class="cormorant w-full py-3 px-4 rounded-xl font-bold text-sm text-black transition-all duration-300 hover:scale-105" style="background:linear-gradient(135deg,#B9A378 0%,#8B7355 100%)">
+                            ➕ Ajouter un lot
+                        </button>
+                    </div>
+
+                    <div class="bg-slate-900/80 border border-slate-700/70 rounded-2xl p-4">
+                        <h3 class="georgia font-semibold text-sm mb-3 text-gray-200">Simulation globale</h3>
+                        <div class="space-y-2 text-xs georgia mb-3" id="prizeSummary"></div>
+                        <p class="georgia text-xs text-gray-400">
+                            Utilise les probabilités pour équilibrer l'expérience : 
+                            beaucoup de petites attentions, quelques gros cadeaux ✨
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Historique -->
         <div id="content-history" class="tab-content hidden">
             <div class="bg-gradient-to-br from-gray-900 to-black border border-yellow-900/30 rounded-2xl p-6 sm:p-8 shadow-2xl">
                 <h2 class="brittany text-3xl mb-6" style="color:#B9A378">Historique des participations</h2>
+
                 <div class="overflow-x-auto">
                     <table class="georgia text-sm">
-                        <thead><tr><th>Date</th><th>Client</th><th>Téléphone</th><th>Canal</th><th>Lot</th><th>Code</th><th>Avis</th><th>Notes</th><th></th></tr></thead>
-                        <tbody id="historyTable"><tr><td colspan="9" class="text-center text-gray-500 py-8">Aucune participation</td></tr></tbody>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Client</th>
+                                <th>Email</th>
+                                <th>Téléphone</th>
+                                <th>Canal</th>
+                                <th>Lot</th>
+                                <th>Code</th>
+                                <th>Avis</th>
+                                <th>Utilisé</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTable">
+                            <tr>
+                                <td colspan="10" class="text-center text-gray-500 py-8">
+                                    Aucune participation
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        
+
+        <!-- Config -->
         <div id="content-config" class="tab-content hidden">
             <div class="bg-gradient-to-br from-gray-900 to-black border border-yellow-900/30 rounded-2xl p-6 sm:p-8 shadow-2xl">
-                <h2 class="brittany text-3xl mb-6" style="color:#B9A378">Configuration des liens d'avis</h2>
-                <div class="space-y-6">
-                    <div><label class="georgia text-sm text-gray-400 mb-2 block flex items-center gap-2"><span class="text-2xl">🏨</span> Lien Booking.com</label><input type="url" id="bookingUrl" class="input-field" placeholder="https://www.booking.com/reviewlist.html?pagename=..."/><p class="text-xs text-gray-500 mt-2">Lien vers votre page d'avis Booking</p></div>
-                    <div><label class="georgia text-sm text-gray-400 mb-2 block flex items-center gap-2"><span class="text-2xl">🏠</span> Lien Airbnb</label><input type="url" id="airbnbUrl" class="input-field" placeholder="https://www.airbnb.fr/rooms/..."/><p class="text-xs text-gray-500 mt-2">Lien vers votre logement Airbnb</p></div>
-                    <div><label class="georgia text-sm text-gray-400 mb-2 block flex items-center gap-2"><span class="text-2xl">⭐</span> Lien Google Reviews</label><input type="url" id="googleUrl" class="input-field" placeholder="https://g.page/r/..."/><p class="text-xs text-gray-500 mt-2">Lien vers votre page Google My Business</p></div>
-                    <div><label class="georgia text-sm text-gray-400 mb-2 block flex items-center gap-2"><span class="text-2xl">🌐</span> URL de votre site</label><input type="url" id="siteUrl" class="input-field" value="https://gami.rocandlove.fr" readonly/><p class="text-xs text-gray-500 mt-2">URL complète de votre site (pour le générateur de liens)</p></div>
+                <h2 class="brittany text-3xl mb-6" style="color:#B9A378">Configuration du parcours</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <div class="bg-slate-900/80 border border-slate-700/80 rounded-2xl p-4">
+                            <h3 class="georgia font-semibold text-sm mb-3 text-gray-200">Liens publics</h3>
+                            <div class="space-y-3 text-xs georgia">
+                                <div>
+                                    <p class="text-gray-400 mb-1">URL publique de la page de jeu</p>
+                                    <input type="text" id="publicUrl" class="input-field text-xs" placeholder="https://gami.rocandlove.fr"/>
+                                    <p class="text-[0.7rem] text-gray-500 mt-1">C'est le lien final vers lequel les clients sont redirigés après le lien court.</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400 mb-1">URL de votre site (base pour le lien long historique)</p>
+                                    <input type="text" id="siteUrl" class="input-field text-xs" placeholder="https://gami.rocandlove.fr"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-900/80 border border-slate-700/80 rounded-2xl p-4">
+                            <h3 class="georgia font-semibold text-sm mb-3 text-gray-200">Avis & plateforme</h3>
+                            <div class="space-y-3 text-xs georgia">
+                                <div>
+                                    <p class="text-gray-400 mb-1">Lien vers la fiche Google Roc & Love</p>
+                                    <input type="text" id="googleUrl" class="input-field text-xs" placeholder="https://g.page/..."/>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400 mb-1">Lien vers la page Booking.com</p>
+                                    <input type="text" id="bookingUrl" class="input-field text-xs" placeholder="https://www.booking.com/..."/>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400 mb-1">Lien vers la page Airbnb</p>
+                                    <input type="text" id="airbnbUrl" class="input-field text-xs" placeholder="https://www.airbnb.fr/..."/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="bg-slate-900/80 border border-slate-700/80 rounded-2xl p-4">
+                            <h3 class="georgia font-semibold text-sm mb-3 text-gray-200">Sécurité admin</h3>
+                            <div class="space-y-3 text-xs georgia">
+                                <div class="flex items-center justify-between gap-3">
+                                    <div>
+                                        <p class="text-gray-400 mb-1">Mot de passe admin</p>
+                                        <input type="password" id="adminPassword" class="input-field text-xs" placeholder="••••••••"/>
+                                        <p class="text-[0.7rem] text-gray-500 mt-1">Utilisé pour accéder au dashboard (protégé côté Vercel).</p>
+                                    </div>
+                                    <button onclick="togglePasswordVisibility()" class="cormorant text-xs px-3 py-2 rounded-lg border border-slate-600 hover:bg-slate-800/60">
+                                        👁️
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-900/80 border border-slate-700/80 rounded-2xl p-4">
+                            <h3 class="georgia font-semibold text-sm mb-3 text-gray-200">Divers</h3>
+                            <div class="space-y-3 text-xs georgia">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-300">Mode debug (afficher les logs)</span>
+                                    <label class="switch">
+                                        <input type="checkbox" id="debugMode">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <p class="text-[0.7rem] text-gray-500">À utiliser uniquement si tu dois comprendre un bug ou un comportement étrange.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end gap-3 pt-2">
+                            <button onclick="resetConfig()" class="cormorant px-4 py-2 rounded-lg border border-red-800/70 text-xs text-red-300 hover:bg-red-900/20">
+                                Réinitialiser
+                            </button>
+                            <button onclick="saveConfig()" class="cormorant px-4 py-2 rounded-lg border border-emerald-700/70 text-xs text-emerald-200 hover:bg-emerald-900/20">
+                                💾 Sauvegarder la config
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <button onclick="saveConfig()" class="cormorant w-full mt-6 py-3 px-6 rounded-xl font-bold text-black transition-all duration-300 hover:scale-105" style="background:linear-gradient(135deg,#B9A378 0%,#8B7355 100%)">💾 Sauvegarder la configuration</button>
             </div>
         </div>
+
+            </section>
+        </main>
     </div>
-    
-    <div id="passwordModal" class="modal-overlay hidden" onclick="closePasswordModal(event)"><div class="bg-gradient-to-br from-gray-900 to-black border border-yellow-900/30 rounded-2xl p-8 max-w-md w-full mx-4" onclick="event.stopPropagation()"><h3 class="brittany text-3xl text-center mb-6" style="color:#B9A378">Gestion du mot de passe</h3><div class="mb-6"><label class="georgia text-sm text-gray-400 mb-2 block">Mot de passe actuel</label><div class="flex gap-2"><input type="password" id="currentPasswordDisplay" class="input-field" readonly value="********"/><button onclick="togglePasswordVisibility()" class="cormorant py-2 px-4 rounded-lg font-bold text-sm border-2 border-yellow-700 text-white transition-all duration-300 hover:bg-yellow-900/20">👁️</button></div></div><div class="mb-6"><label class="georgia text-sm text-gray-400 mb-2 block">Nouveau mot de passe</label><input type="password" id="newPassword" class="input-field" placeholder="Entrez le nouveau mot de passe"/></div><div class="mb-6"><label class="georgia text-sm text-gray-400 mb-2 block">Confirmer</label><input type="password" id="confirmPassword" class="input-field" placeholder="Confirmez"/></div><button onclick="changePassword()" class="cormorant w-full py-3 px-6 rounded-xl font-bold text-black transition-all duration-300 hover:scale-105 mb-3" style="background:linear-gradient(135deg,#B9A378 0%,#8B7355 100%)">Changer</button><button onclick="closePasswordModal()" class="cormorant w-full py-3 px-6 rounded-xl font-bold border-2 border-yellow-700 text-white transition-all duration-300 hover:bg-yellow-900/20">Annuler</button><p id="passwordMessage" class="text-sm text-center mt-3 hidden"></p></div></div>
-    
-    <div id="prizeModal" class="modal-overlay hidden" onclick="closePrizeModal(event)"><div class="bg-gradient-to-br from-gray-900 to-black border border-yellow-900/30 rounded-2xl p-8 max-w-md w-full mx-4" onclick="event.stopPropagation()"><h3 class="brittany text-3xl text-center mb-6" style="color:#B9A378" id="prizeModalTitle">Ajouter un lot</h3><div class="mb-4"><label class="georgia text-sm text-gray-400 mb-2 block">Emoji</label><input type="text" id="prizeEmoji" class="input-field text-center text-2xl" placeholder="🎁" maxlength="2"/></div><div class="mb-4"><label class="georgia text-sm text-gray-400 mb-2 block">Titre</label><input type="text" id="prizeTitle" class="input-field" placeholder="Bouteille offerte"/></div><div class="mb-4"><label class="georgia text-sm text-gray-400 mb-2 block">Description</label><input type="text" id="prizeDescription" class="input-field" placeholder="lors de votre prochaine réservation"/></div><div class="mb-4"><label class="georgia text-sm text-gray-400 mb-2 block">Code promo</label><input type="text" id="prizeCode" class="input-field" placeholder="ROCLOVEXX"/></div><div class="mb-6"><label class="georgia text-sm text-gray-400 mb-2 block">Probabilité (%)</label><input type="number" id="prizeProbability" class="input-field" placeholder="30" min="0" max="100"/><p class="text-xs text-gray-500 mt-1">Total = 100%</p></div><button onclick="savePrize()" class="cormorant w-full py-3 px-6 rounded-xl font-bold text-black transition-all duration-300 hover:scale-105 mb-3" style="background:linear-gradient(135deg,#B9A378 0%,#8B7355 100%)">💾 Sauvegarder</button><button onclick="closePrizeModal()" class="cormorant w-full py-3 px-6 rounded-xl font-bold border-2 border-yellow-700 text-white transition-all duration-300 hover:bg-yellow-900/20">Annuler</button></div></div>
-    
+
     <script>
         let adminData=[],isPasswordVisible=!1,prizes=[],editingPrizeId=null,currentQRCode=null;
-        
-        // ✅ FONCTION DE CHARGEMENT DES DONNÉES
-        async function loadData(){
-            await loadFromNeon();
-            prizes=JSON.parse(localStorage.getItem('rocLovePrizes')||'[]');
-            if(0===prizes.length){
-                prizes=[
-                    {id:1,title:'10% de réduction',description:'sur votre prochaine réservation',emoji:'🎫',probability:15,code:'ROCLOVE10'},
-                    {id:2,title:'15% de réduction',description:'sur votre prochaine réservation',emoji:'🎟️',probability:5,code:'ROCLOVE15'},
-                    {id:3,title:'Bouteille de Vouvray offerte',description:'lors de votre prochaine réservation',emoji:'🍾',probability:50,code:'ROCLOVEVV'},
-                    {id:4,title:'Love Box offerte',description:'lors de votre prochaine réservation',emoji:'💝',probability:30,code:'ROCLOVELB'}
-                ];
-                savePrizes()
+
+        function showTab(tabId){
+            document.querySelectorAll('.tab-content').forEach(t=>t.classList.add('hidden'));
+            document.querySelectorAll('.tab-button').forEach(b=>b.classList.remove('active'));
+            document.getElementById('content-'+tabId).classList.remove('hidden');
+            document.getElementById('tab-'+tabId).classList.add('active')
+        }
+
+        function getChannelBadge(channel){
+            switch(channel){
+                case 'direct':
+                    return '<span class="badge badge-direct"><span class="badge-dot"></span><span>Direct</span></span>';
+                case 'booking':
+                    return '<span class="badge badge-booking"><span class="badge-dot"></span><span>Booking</span></span>';
+                case 'airbnb':
+                    return '<span class="badge badge-airbnb"><span class="badge-dot"></span><span>Airbnb</span></span>';
+                default:
+                    return '<span class="badge"><span class="badge-dot" style="background:#9ca3af"></span><span>Autre</span></span>'
             }
-            updateStatistics();
-            updateChannelStats();
-            updateHistory();
-            updatePrizesStats();
-            updatePrizesList();
-            loadConfig()
         }
-        
-        // ✅ NOUVEAU BOUTON ACTUALISER MANUEL
-        async function refreshData(){
-            const btn = event.target;
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '⏳ Chargement...';
-            btn.disabled = true;
-            
-            await loadData();
-            
-            btn.innerHTML = '✅ À jour !';
-            setTimeout(() => {
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-            }, 1500);
+
+        function updateStats(){
+            const total=adminData.length;
+            document.getElementById('totalReviews').textContent=total||'–';
+            if(0===total){
+                document.getElementById('clickRate').textContent='–';
+                document.getElementById('googleReviews').textContent='–';
+                document.getElementById('scratchRate').textContent='–';
+                document.getElementById('statsDirect').textContent='–';
+                document.getElementById('statsBooking').textContent='–';
+                document.getElementById('statsAirbnb').textContent='–';
+                document.getElementById('statsReviewClicks').textContent='–';
+                document.getElementById('statsScratch').textContent='–';
+                return
+            }
+            const clicks=adminData.filter(d=>d.reviewClicked).length,
+                  scratches=adminData.filter(d=>d.scratched).length,
+                  direct=adminData.filter(d=>'direct'===d.channel).length,
+                  booking=adminData.filter(d=>'booking'===d.channel).length,
+                  airbnb=adminData.filter(d=>'airbnb'===d.channel).length;
+            document.getElementById('clickRate').textContent=Math.round(clicks/total*100)+'%';
+            document.getElementById('scratchRate').textContent=Math.round(scratches/total*100)+'%';
+            document.getElementById('statsDirect').textContent=direct+' ('+Math.round(direct/total*100)+'%)';
+            document.getElementById('statsBooking').textContent=booking+' ('+Math.round(booking/total*100)+'%)';
+            document.getElementById('statsAirbnb').textContent=airbnb+' ('+Math.round(airbnb/total*100)+'%)';
+            document.getElementById('statsReviewClicks').textContent=clicks+' ('+Math.round(clicks/total*100)+'%)';
+            document.getElementById('googleReviews').textContent=direct+' ('+Math.round(direct/total*100)+'%)';
+            document.getElementById('statsScratch').textContent=scratches+' ('+Math.round(scratches/total*100)+'%)'
         }
-        
+
         async function loadFromNeon(){
             try{
                 const response=await fetch('/api/get-participations');
@@ -246,13 +542,14 @@
                         sessionId:p.session_id,
                         clientName:p.client_name,
                         clientPhone:p.client_phone,
+                        clientEmail:p.client_email,
                         prize:{emoji:p.prize_emoji,title:p.prize_title,description:p.prize_description},
                         code:p.promo_code,
                         date:p.created_at,
                         reviewClicked:p.review_clicked,
                         scratched:p.scratched,
                         channel:p.channel,
-                        notes:p.notes||''
+                        used:p.used||!1
                     }))
                 }
             }catch(error){
@@ -260,324 +557,301 @@
                 adminData=[]
             }
         }
-        
-        function savePrizes(){localStorage.setItem('rocLovePrizes',JSON.stringify(prizes))}
-                
-        function copyGeneratedLink(){
-            const link=document.getElementById('generatedLink').value;
-            navigator.clipboard.writeText(link);
-            const button=event.target,originalText=button.textContent;
-            button.textContent='✓';
-            setTimeout(()=>{button.textContent=originalText},2000)
-        }
-        
-        function downloadQRCode(){
-            if(!currentQRCode)return;
-            const link=document.createElement('a');
-            link.download=`qrcode-${document.getElementById('genName').value}.png`;
-            link.href=currentQRCode.toDataURL();
-            link.click()
-        }
-        
-        function printQRCode(){
-            if(!currentQRCode)return;
-            const win=window.open('','_blank');
-            win.document.write('<html><head><title>QR Code</title></head><body style="text-align:center">');
-            win.document.write('<h2>Roc & Love - QR Code</h2>');
-            win.document.write('<p>'+document.getElementById('genName').value+'</p>');
-            win.document.write('<img src="'+currentQRCode.toDataURL()+'"/>');
-            win.document.write('</body></html>');
-            win.document.close();
-            win.print()
-        }
-        
-        function updateStatistics(){
-            const total=adminData.length,
-                  reviewsClicked=adminData.filter(d=>d.reviewClicked).length,
-                  conversionRate=total>0?((reviewsClicked/total)*100).toFixed(1):0;
-            document.getElementById('totalParticipations').textContent=total;
-            document.getElementById('totalReviews').textContent=reviewsClicked;
-            document.getElementById('conversionRate').textContent=conversionRate+'%';
-            document.getElementById('codesUsed').textContent='0'
-        }
-        
-        function updateChannelStats(){
-            const channels={
-                booking:{name:'Booking',icon:'🏨',count:0,reviews:0},
-                airbnb:{name:'Airbnb',icon:'🏠',count:0,reviews:0},
-                direct:{name:'Direct',icon:'⭐',count:0,reviews:0}
-            };
-            adminData.forEach(d=>{
-                const channel=d.channel||'direct';
-                if(channels[channel]){
-                    channels[channel].count++;
-                    if(d.reviewClicked)channels[channel].reviews++
-                }
-            });
-            const html=Object.entries(channels).map(([key,data])=>{
-                const rate=data.count>0?((data.reviews/data.count)*100).toFixed(0):0;
-                return`<div class="stat-card"><div class="text-4xl mb-2">${data.icon}</div><div class="text-sm text-gray-400 mb-1">${data.name}</div><div class="text-2xl font-bold mb-1" style="color:#B9A378">${data.count}</div><div class="text-xs text-gray-500">${data.reviews} avis (${rate}%)</div></div>`
-            }).join('');
-            document.getElementById('channelStats').innerHTML=html
-        }
-        
-        function updatePrizesStats(){
-            const codeCounts={};
-            prizes.forEach(p=>{codeCounts[p.code]=0});
-            adminData.forEach(d=>{if(d.code&&codeCounts.hasOwnProperty(d.code))codeCounts[d.code]++});
-            const html=prizes.map(prize=>`<div class="stat-card"><div class="flex items-center justify-between mb-2"><span class="text-4xl">${prize.emoji}</span><span class="code-badge code-${prize.code}">${prize.code}</span></div><div class="text-sm text-gray-400 mb-1">${prize.title}</div><div class="text-2xl font-bold" style="color:#B9A378">${codeCounts[prize.code]||0}</div><div class="text-xs text-gray-500 mt-1">Proba: ${prize.probability}%</div></div>`).join('');
-            document.getElementById('prizesStats').innerHTML=html
-        }
-        
-        function updatePrizesList(){
-            const totalProba=prizes.reduce((sum,p)=>sum+p.probability,0),
-                  warningClass=100!==totalProba?'border-red-500':'',
-                  html=prizes.map(prize=>`<div class="stat-card ${warningClass}"><div class="flex items-center justify-between"><div class="flex items-center gap-4 flex-1"><span class="text-5xl">${prize.emoji}</span><div class="flex-1"><h3 class="text-xl font-bold" style="color:#B9A378">${prize.title}</h3><p class="text-sm text-gray-400">${prize.description}</p><div class="flex items-center gap-3 mt-2"><span class="code-badge code-${prize.code}">${prize.code}</span><span class="text-sm text-gray-500">Proba: ${prize.probability}%</span></div></div></div><div class="flex gap-2"><button onclick="editPrize(${prize.id})" class="cormorant py-2 px-4 rounded-lg font-bold text-sm text-black transition-all duration-300 hover:scale-105" style="background:linear-gradient(135deg,#B9A378 0%,#8B7355 100%)">✏️</button><button onclick="deletePrize(${prize.id})" class="cormorant py-2 px-4 rounded-lg font-bold text-sm border-2 border-red-500 text-red-400 transition-all duration-300 hover:bg-red-900/20">🗑️</button></div></div></div>`).join(''),
-                  warning=100!==totalProba?`<div class="bg-red-900/20 border border-red-500 rounded-xl p-4 mb-4"><p class="text-red-400 text-center">⚠️ Total = ${totalProba}% (doit être 100%)</p></div>`:'';
-            document.getElementById('prizesList').innerHTML=warning+html
-        }
-        
-        function getChannelBadge(channel){
-            const channels={
-                booking:{class:'channel-booking',text:'🏨 Booking'},
-                airbnb:{class:'channel-airbnb',text:'🏠 Airbnb'},
-                direct:{class:'channel-direct',text:'⭐ Direct'}
-            },ch=channels[channel]||channels.direct;
-            return`<span class="channel-badge ${ch.class}">${ch.text}</span>`
-        }
-        
+
         function updateHistory(){
             const tbody=document.getElementById('historyTable');
             if(0===adminData.length){
-                tbody.innerHTML='<tr><td colspan="9" class="text-center text-gray-500 py-8">Aucune participation</td></tr>';
+                tbody.innerHTML='<tr><td colspan="10" class="text-center text-gray-500 py-8">Aucune participation</td></tr>';
                 return
             }
             const sortedData=[...adminData].sort((a,b)=>new Date(b.date)-new Date(a.date));
-            tbody.innerHTML=sortedData.map((item,index)=>{
+            tbody.innerHTML=sortedData.map(item=>{
                 const date=new Date(item.date),
                       dateStr=date.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}),
                       clientName=item.clientName||'Non renseigné',
                       clientPhone=item.clientPhone||'Non renseigné',
+                      clientEmail=item.clientEmail||'Non renseigné',
                       channel=item.channel||'direct',
                       prizeTitle=item.prize?.title||'Inconnu',
                       prizeEmoji=item.prize?.emoji||'🎁',
                       code=item.code||'N/A',
                       reviewIcon=item.reviewClicked?'✅':'❌',
-                      notes=item.notes||'';
-                return`<tr><td>${dateStr}</td><td class="font-semibold">${clientName}</td><td><a href="tel:${clientPhone}" class="text-yellow-700 hover:text-yellow-500">${clientPhone}</a></td><td>${getChannelBadge(channel)}</td><td>${prizeEmoji} ${prizeTitle}</td><td><span class="code-badge code-${code}">${code}</span></td><td class="text-center">${reviewIcon}</td><td><input type="text" value="${notes}" onchange="saveNote('${item.sessionId}', this.value)" placeholder="Notes..." class="w-full px-2 py-1 bg-gray-800 border border-gray-700 rounded text-sm"/></td><td><button onclick="deleteEntry('${item.sessionId}')" class="text-red-400 hover:text-red-300 text-xs">🗑️</button></td></tr>`
+                      used=!!item.used;
+
+                const emailCell=clientEmail&&'Non renseigné'!==clientEmail
+                    ?`<a href="mailto:${clientEmail}" class="text-yellow-700 hover:text-yellow-500">${clientEmail}</a>`
+                    :clientEmail;
+
+                const phoneCell=clientPhone&&'Non renseigné'!==clientPhone
+                    ?`<a href="tel:${clientPhone}" class="text-yellow-700 hover:text-yellow-500">${clientPhone}</a>`
+                    :clientPhone;
+
+                return `
+                    <tr>
+                        <td>${dateStr}</td>
+                        <td class="font-semibold">${clientName}</td>
+                        <td>${emailCell}</td>
+                        <td>${phoneCell}</td>
+                        <td>${getChannelBadge(channel)}</td>
+                        <td>${prizeEmoji} ${prizeTitle}</td>
+                        <td><span class="code-badge code-${code}">${code}</span></td>
+                        <td class="text-center">${reviewIcon}</td>
+                        <td class="text-center">
+                            <input type="checkbox" ${used?'checked':''} onchange="toggleUsed('${item.sessionId}',this.checked)"/>
+                        </td>
+                        <td>
+                            <button onclick="deleteEntry('${item.sessionId}')" class="text-red-400 hover:text-red-300 text-xs">🗑️</button>
+                        </td>
+                    </tr>
+                `;
             }).join('')
         }
-        
-        // ✅ NOUVELLE FONCTION SAVE NOTE (avec sessionId)
-        async function saveNote(sessionId, note){
-            // TODO: Créer API pour sauvegarder les notes dans Neon
-            // Pour l'instant, on garde juste en local
-            const item = adminData.find(d => d.sessionId === sessionId);
-            if(item) item.notes = note;
+
+        function toggleUsed(sessionId,used){
+            const item=adminData.find(d=>d.sessionId===sessionId);
+            item&&(item.used=used)
         }
-        
-        // ✅ NOUVELLE FONCTION DELETE (supprime dans Neon!)
-        async function deleteEntry(sessionId){
-            if(!confirm('Supprimer cette participation ?')) return;
-            
-            try {
-                const response = await fetch('/api/delete-participation', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ sessionId })
-                });
-                
-                if(!response.ok) {
-                    alert('❌ Erreur lors de la suppression');
-                    return;
+
+        function updateConfigView(){
+            const siteUrlInput=document.getElementById('siteUrl'),
+                  publicUrlInput=document.getElementById('publicUrl'),
+                  googleUrlInput=document.getElementById('googleUrl'),
+                  bookingUrlInput=document.getElementById('bookingUrl'),
+                  airbnbUrlInput=document.getElementById('airbnbUrl'),
+                  adminPasswordInput=document.getElementById('adminPassword'),
+                  debugModeInput=document.getElementById('debugMode');
+            siteUrlInput&&(siteUrlInput.value=window.dashboardConfig?.siteUrl||'');
+            publicUrlInput&&(publicUrlInput.value=window.dashboardConfig?.publicUrl||'');
+            googleUrlInput&&(googleUrlInput.value=window.dashboardConfig?.googleUrl||'');
+            bookingUrlInput&&(bookingUrlInput.value=window.dashboardConfig?.bookingUrl||'');
+            airbnbUrlInput&&(airbnbUrlInput.value=window.dashboardConfig?.airbnbUrl||'');
+            adminPasswordInput&&(adminPasswordInput.value=window.dashboardConfig?.adminPassword||'');
+            debugModeInput&&(debugModeInput.checked=!!window.dashboardConfig?.debugMode)
+        }
+
+        async function loadConfig(){
+            try{
+                const response=await fetch('/api/get-config');
+                if(!response.ok)throw new Error('Erreur HTTP '+response.status);
+                const data=await response.json();
+                if(data.success){
+                    window.dashboardConfig=data.config||{};
+                    updateConfigView()
                 }
-                
-                // Recharger les données après suppression
-                await loadData();
-                
-            } catch(error) {
-                console.error('Erreur:', error);
-                alert('❌ Erreur de connexion');
+            }catch(error){
+                console.error('Erreur chargement config:',error);
+                window.dashboardConfig={}
             }
         }
-        
-        function exportData(){
-            if(0===adminData.length){alert('Aucune donnée');return}
-            const headers=['Date','Nom','Téléphone','Canal','Lot','Code','Avis','Notes'],
-                  rows=adminData.map(item=>{
-                      const date=new Date(item.date).toLocaleString('fr-FR'),
-                            name=item.clientName||'Non renseigné',
-                            phone=item.clientPhone||'Non renseigné',
-                            channel=item.channel||'direct',
-                            prize=item.prize?.title||'Inconnu',
-                            code=item.code||'N/A',
-                            review=item.reviewClicked?'Oui':'Non',
-                            notes=item.notes||'';
-                      return[date,name,phone,channel,prize,code,review,notes]
-                  }),
-                  csvContent=[headers.join(','),...rows.map(row=>row.map(cell=>`"${cell}"`).join(','))].join('\n'),
-                  blob=new Blob([csvContent],{type:'text/csv;charset=utf-8;'}),
-                  link=document.createElement('a'),
-                  url=URL.createObjectURL(blob);
-            link.setAttribute('href',url);
-            link.setAttribute('download',`roc-love-export-${new Date().toISOString().split('T')[0]}.csv`);
-            link.style.visibility='hidden';
+
+        async function saveConfig(){
+            const siteUrl=document.getElementById('siteUrl').value.trim(),
+                  publicUrl=document.getElementById('publicUrl').value.trim(),
+                  googleUrl=document.getElementById('googleUrl').value.trim(),
+                  bookingUrl=document.getElementById('bookingUrl').value.trim(),
+                  airbnbUrl=document.getElementById('airbnbUrl').value.trim(),
+                  adminPassword=document.getElementById('adminPassword').value.trim(),
+                  debugMode=document.getElementById('debugMode').checked;
+            try{
+                const response=await fetch('/api/save-config',{
+                    method:'POST',
+                    headers:{'Content-Type':'application/json'},
+                    body:JSON.stringify({siteUrl,publicUrl,googleUrl,bookingUrl,airbnbUrl,adminPassword,debugMode})
+                });
+                if(!response.ok)throw new Error('Erreur HTTP '+response.status);
+                const data=await response.json();
+                if(data.success){
+                    alert('Configuration sauvegardée ✅');
+                    window.dashboardConfig={siteUrl,publicUrl,googleUrl,bookingUrl,airbnbUrl,adminPassword,debugMode}
+                }else alert('Erreur lors de la sauvegarde')
+            }catch(error){
+                console.error('Erreur sauvegarde config:',error);
+                alert('Erreur lors de la sauvegarde de la configuration.')
+            }
+        }
+
+        function resetConfig(){
+            if(!confirm('Réinitialiser toute la configuration ?'))return;
+            window.dashboardConfig={};
+            updateConfigView()
+        }
+
+        function togglePasswordVisibility(){
+            const input=document.getElementById('adminPassword');
+            if(!input)return;
+            isPasswordVisible=!isPasswordVisible;
+            input.type=isPasswordVisible?'text':'password'
+        }
+
+        async function exportData(){
+            if(!adminData.length){
+                alert('Aucune donnée à exporter');
+                return
+            }
+            const header=['Date','Nom','Email','Téléphone','Canal','Lot','Code','Avis cliqué','Gratté','Session ID'];
+            const rows=adminData.map(item=>[
+                item.date,
+                item.clientName||'',
+                item.clientEmail||'',
+                item.clientPhone||'',
+                item.channel||'',
+                item.prize?.title||'',
+                item.code||'',
+                item.reviewClicked?'1':'0',
+                item.scratched?'1':'0',
+                item.sessionId||''
+            ]);
+            const csvContent=[header,...rows].map(row=>row.map(field=>`"${(field||'').toString().replace(/"/g,'""')}"`).join(',')).join('\n');
+            const blob=new Blob([csvContent],{type:'text/csv;charset=utf-8;'});
+            const url=URL.createObjectURL(blob);
+            const link=document.createElement('a');
+            link.href=url;
+            link.download='rocandlove_participations.csv';
             document.body.appendChild(link);
             link.click();
-            document.body.removeChild(link)
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url)
         }
-        
-        function showTab(tabName){
-            document.querySelectorAll('.tab-content').forEach(el=>el.classList.add('hidden'));
-            document.querySelectorAll('.tab-button').forEach(el=>el.classList.remove('active'));
-            document.getElementById('content-'+tabName).classList.remove('hidden');
-            document.getElementById('tab-'+tabName).classList.add('active')
-        }
-        
-        function showPasswordModal(){
-            document.getElementById('passwordModal').classList.remove('hidden');
-            document.getElementById('currentPasswordDisplay').value='********';
-            isPasswordVisible=!1
-        }
-        
-        function closePasswordModal(event){
-            if(event&&event.target!==event.currentTarget)return;
-            document.getElementById('passwordModal').classList.add('hidden');
-            document.getElementById('newPassword').value='';
-            document.getElementById('confirmPassword').value='';
-            document.getElementById('passwordMessage').classList.add('hidden')
-        }
-        
-        function togglePasswordVisibility(){
-            const currentPassword=localStorage.getItem('rocLoveAdminPassword')||'RocLove2025',
-                  input=document.getElementById('currentPasswordDisplay');
-            if(isPasswordVisible){
-                input.value='********';
-                isPasswordVisible=!1
-            }else{
-                input.value=currentPassword;
-                isPasswordVisible=!0
-            }
-        }
-        
-        function changePassword(){
-            const newPassword=document.getElementById('newPassword').value,
-                  confirmPassword=document.getElementById('confirmPassword').value,
-                  messageEl=document.getElementById('passwordMessage');
-            if(!newPassword||!confirmPassword){
-                messageEl.textContent='Remplir tous les champs';
-                messageEl.className='text-red-400 text-sm text-center mt-3';
-                messageEl.classList.remove('hidden');
+
+        function renderPrizes(){
+            const container=document.getElementById('prizeList'),
+                  summary=document.getElementById('prizeSummary');
+            if(!container)return;
+            if(0===prizes.length){
+                container.innerHTML='<p class="text-xs text-gray-500 georgia">Aucun lot configuré pour le moment.</p>';
+                summary.innerHTML='<p class="text-xs text-gray-500 georgia">Ajoute au moins un lot pour activer le jeu.</p>';
                 return
             }
-            if(newPassword!==confirmPassword){
-                messageEl.textContent='Pas identiques';
-                messageEl.className='text-red-400 text-sm text-center mt-3';
-                messageEl.classList.remove('hidden');
-                return
-            }
-            if(6>newPassword.length){
-                messageEl.textContent='Min 6 caractères';
-                messageEl.className='text-red-400 text-sm text-center mt-3';
-                messageEl.classList.remove('hidden');
-                return
-            }
-            localStorage.setItem('rocLoveAdminPassword',newPassword);
-            messageEl.textContent='✓ Changé !';
-            messageEl.className='text-green-400 text-sm text-center mt-3';
-            messageEl.classList.remove('hidden');
-            setTimeout(()=>{closePasswordModal()},2000)
+            container.innerHTML=prizes.map(prize=>`
+                <div class="prize-card">
+                    <div class="flex items-start justify-between gap-2 mb-2">
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-xl">${prize.emoji||'🎁'}</span>
+                                <h3 class="georgia font-semibold text-sm text-gray-100">${prize.title||'Lot sans titre'}</h3>
+                            </div>
+                            <p class="georgia text-xs text-gray-400">${prize.description||''}</p>
+                        </div>
+                        <button onclick="editPrize('${prize.id}')" class="text-xs text-yellow-300 hover:text-yellow-100">Modifier</button>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 mt-3 text-[0.7rem] georgia">
+                        <div>
+                            <p class="text-gray-400 mb-1">Probabilité</p>
+                            <p class="font-semibold text-yellow-200">${prize.probability||0}%</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 mb-1">Occurrences max</p>
+                            <p class="font-semibold text-gray-200">${prize.maxOccurrences||'∞'}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            const totalProb=prizes.reduce((sum,p)=>sum+(parseFloat(p.probability)||0),0);
+            summary.innerHTML=`
+                <p class="text-xs text-gray-300 mb-2">Nombre de lots configurés : <span class="font-semibold">${prizes.length}</span></p>
+                <p class="text-xs ${totalProb>100?'text-red-300':'text-gray-400'}">
+                    Somme des probabilités : <span class="font-semibold">${totalProb}%</span> 
+                    ${totalProb>100?'(⚠️ supérieure à 100%, à rééquilibrer)':'(ok si inférieure ou égale à 100%)'}
+                </p>
+            `
         }
-        
-        function showAddPrizeModal(){
-            editingPrizeId=null;
-            document.getElementById('prizeModalTitle').textContent='Ajouter un lot';
-            document.getElementById('prizeEmoji').value='';
-            document.getElementById('prizeTitle').value='';
-            document.getElementById('prizeDescription').value='';
-            document.getElementById('prizeCode').value='';
-            document.getElementById('prizeProbability').value='';
-            document.getElementById('prizeModal').classList.remove('hidden')
-        }
-        
-        function editPrize(id){
-            const prize=prizes.find(p=>p.id===id);
-            if(!prize)return;
+
+        function addPrize(){
+            const id='prize_'+Date.now();
+            prizes.push({id,title:'Nouveau lot',emoji:'🎁',description:'',probability:10,maxOccurrences:null});
             editingPrizeId=id;
-            document.getElementById('prizeModalTitle').textContent='Modifier';
-            document.getElementById('prizeEmoji').value=prize.emoji;
-            document.getElementById('prizeTitle').value=prize.title;
-            document.getElementById('prizeDescription').value=prize.description;
-            document.getElementById('prizeCode').value=prize.code;
-            document.getElementById('prizeProbability').value=prize.probability;
-            document.getElementById('prizeModal').classList.remove('hidden')
+            openPrizeModal()
         }
-        
-        function closePrizeModal(event){
-            if(event&&event.target!==event.currentTarget)return;
-            document.getElementById('prizeModal').classList.add('hidden')
+
+        function editPrize(id){
+            editingPrizeId=id;
+            openPrizeModal()
         }
-        
-        function savePrize(){
-            const emoji=document.getElementById('prizeEmoji').value.trim(),
-                  title=document.getElementById('prizeTitle').value.trim(),
-                  description=document.getElementById('prizeDescription').value.trim(),
-                  code=document.getElementById('prizeCode').value.trim().toUpperCase(),
-                  probability=parseInt(document.getElementById('prizeProbability').value);
-            if(!emoji||!title||!description||!code||!probability){alert('Remplir tous les champs');return}
-            if(0>probability||100<probability){alert('0-100');return}
-            if(editingPrizeId){
-                const index=prizes.findIndex(p=>p.id===editingPrizeId);
-                -1!==index&&(prizes[index]={id:editingPrizeId,emoji,title,description,code,probability})
-            }else{
-                const newId=0<prizes.length?Math.max(...prizes.map(p=>p.id))+1:1;
-                prizes.push({id:newId,emoji,title,description,code,probability})
+
+        function openPrizeModal(){
+            const prize=prizes.find(p=>p.id===editingPrizeId);
+            if(!prize)return;
+            const title=prompt('Titre du lot :',prize.title||'');
+            if(null===title)return;
+            const emoji=prompt('Emoji (facultatif) :',prize.emoji||'🎁')||'🎁';
+            const description=prompt('Description :',prize.description||'')||'';
+            const probabilityStr=prompt('Probabilité (%) :',prize.probability||10);
+            const probability=parseFloat(probabilityStr)||0;
+            const maxOccurrencesStr=prompt("Nombre maximum d'occurrences (laisser vide pour illimité) :",prize.maxOccurrences||'');
+            const maxOccurrences=maxOccurrencesStr?parseInt(maxOccurrencesStr,10):null;
+            prize.title=title;
+            prize.emoji=emoji;
+            prize.description=description;
+            prize.probability=probability;
+            prize.maxOccurrences=maxOccurrences;
+            renderPrizes()
+        }
+
+        async function loadPrizes(){
+            try{
+                const response=await fetch('/api/get-prizes');
+                if(!response.ok)throw new Error('Erreur HTTP '+response.status);
+                const data=await response.json();
+                if(data.success&&Array.isArray(data.prizes)){
+                    prizes=data.prizes;
+                    renderPrizes()
+                }
+            }catch(error){
+                console.error('Erreur chargement lots:',error);
+                prizes=[];
+                renderPrizes()
             }
-            savePrizes();
-            updatePrizesList();
-            updatePrizesStats();
-            closePrizeModal()
         }
-        
-        function deletePrize(id){
-            if(!confirm('Supprimer ?'))return;
-            prizes=prizes.filter(p=>p.id!==id);
-            savePrizes();
-            updatePrizesList();
-            updatePrizesStats()
-        }
-        
-        function loadConfig(){
-            document.getElementById('bookingUrl').value=localStorage.getItem('rocLoveBookingUrl')||'';
-            document.getElementById('airbnbUrl').value=localStorage.getItem('rocLoveAirbnbUrl')||'';
-            document.getElementById('googleUrl').value=localStorage.getItem('rocLoveGoogleUrl')||''
-        }
-        
-        function saveConfig(){
-            const bookingUrl=document.getElementById('bookingUrl').value.trim(),
-                  airbnbUrl=document.getElementById('airbnbUrl').value.trim(),
-                  googleUrl=document.getElementById('googleUrl').value.trim();
-            if((bookingUrl&&!bookingUrl.startsWith('http'))||(airbnbUrl&&!airbnbUrl.startsWith('http'))||(googleUrl&&!googleUrl.startsWith('http'))){
-                alert('URL invalide');
-                return
+
+        async function saveNote(sessionId,note){
+            try{
+                const response=await fetch('/api/save-note',{
+                    method:'POST',
+                    headers:{'Content-Type':'application/json'},
+                    body:JSON.stringify({sessionId,note})
+                });
+                response.ok||console.error('Erreur sauvegarde note')
+            }catch(error){
+                console.error('Erreur API note:',error)
             }
-            localStorage.setItem('rocLoveBookingUrl',bookingUrl);
-            localStorage.setItem('rocLoveAirbnbUrl',airbnbUrl);
-            localStorage.setItem('rocLoveGoogleUrl',googleUrl);
-            alert('✓ Sauvegardé !')
         }
-        
-        // ❌ SUPPRIMÉ : Plus de setInterval automatique !
-        // ✅ Chargement initial seulement
-        window.onload=loadData;
+
+        async function deleteEntry(sessionId){
+            if(!confirm('Supprimer cette entrée ?'))return;
+            try{
+                const response=await fetch('/api/delete-participation',{
+                    method:'POST',
+                    headers:{'Content-Type':'application/json'},
+                    body:JSON.stringify({sessionId})
+                });
+                if(response.ok){
+                    adminData=adminData.filter(d=>d.sessionId!==sessionId);
+                    updateHistory();
+                    updateStats()
+                }else console.error('Erreur suppression')
+            }catch(error){
+                console.error('Erreur API suppression:',error)
+            }
+        }
+
+        async function loadData(){
+            await Promise.all([loadFromNeon(),loadConfig(),loadPrizes()]);
+            updateHistory();
+            updateStats()
+        }
+
+        document.addEventListener('DOMContentLoaded',()=>{
+            loadData();
+            showTab('generator')
+        });
     </script>
-    
- <script>
-    // QR code basé sur le lien court
+
+    <script>
+    // Gestion du QR code basé sur le lien court
     let currentQRCodeUrl = null;
 
-    // ⚙️ Génération du lien court via l'API Vercel
-    window.generateShortLink = async function() {
+    // ⚙️ Générer un lien court via l'API Vercel
+    window.generateShortLink = async function () {
         const nameEl = document.getElementById('genName');
         const phoneEl = document.getElementById('genPhone');
         const emailEl = document.getElementById('genEmail');
@@ -599,30 +873,33 @@
             return;
         }
 
-        // 🔗 Reconstruire le lien long comme avant
-        // On utilise le champ "URL de votre site" de l'onglet Config si possible
+        if (!clientPhone) {
+            alert("Merci d'indiquer le téléphone du client");
+            return;
+        }
+
+        if (!clientEmail) {
+            alert("L’email est obligatoire pour le jeu (envoi du code par mail). Merci de le renseigner.");
+            return;
+        }
+
+        // 🔗 Base du site (utilise le champ Config si présent, sinon domaine par défaut)
         const siteUrlField = document.getElementById('siteUrl');
         const baseUrl = siteUrlField && siteUrlField.value
             ? siteUrlField.value.trim()
             : 'https://gami.rocandlove.fr';
 
-        let longUrl = `${baseUrl}/?n=${encodeURIComponent(clientName)}`;
-        if (clientPhone) {
-            longUrl += `&t=${encodeURIComponent(clientPhone)}`;
-        }
-        if (clientEmail) {
-            longUrl += `&e=${encodeURIComponent(clientEmail)}`;
-        }
-        longUrl += `&s=${encodeURIComponent(channel)}`;
+        // Lien long historique : ?n=...&t=...&e=...&s=...
+        const longUrl = `${baseUrl}/?n=${encodeURIComponent(clientName)}&t=${encodeURIComponent(clientPhone)}&e=${encodeURIComponent(clientEmail)}&s=${encodeURIComponent(channel)}`;
 
-        // Réinitialiser l'affichage
-        shortInput.value = '';
-        longInput.value = '';
-        qrContainer.innerHTML = '';
+        // Reset affichage
+        if (shortInput) shortInput.value = '';
+        if (longInput) longInput.value = '';
+        if (qrContainer) qrContainer.innerHTML = '';
         currentQRCodeUrl = null;
-        resultBlock.classList.add('hidden');
+        if (resultBlock) resultBlock.classList.add('hidden');
 
-        // Petit feedback sur le bouton
+        // Feedback visuel sur le bouton
         const originalBtnText = btn ? btn.innerHTML : '';
         if (btn) {
             btn.disabled = true;
@@ -630,12 +907,10 @@
         }
 
         try {
-            // 📡 Appel à ton API Vercel
+            // 📡 Appel à l’API /api/create-short-link
             const response = await fetch('/api/create-short-link', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     clientName: clientName,
                     clientPhone: clientPhone,
@@ -650,33 +925,34 @@
 
             const data = await response.json();
 
-            // D’après ce que tu m’as donné :
-            // { success: true, shortUrl: "https://gami.rocandlove.fr/l/xxxxx", code: "xxxxx" }
+            // Format attendu : { success: true, shortUrl: "https://gami.rocandlove.fr/l/xxxxx", code: "xxxxx" }
             if (!data.success || !data.shortUrl) {
                 throw new Error('Réponse de l’API invalide ou incomplète.');
             }
 
             const shortUrl = data.shortUrl;
 
-            // ✅ On remplit les champs
-            shortInput.value = shortUrl;
-            longInput.value = longUrl;
-            resultBlock.classList.remove('hidden');
+            // ✅ Remplir les champs
+            if (shortInput) shortInput.value = shortUrl;
+            if (longInput) longInput.value = longUrl;
+            if (resultBlock) resultBlock.classList.remove('hidden');
 
-            // ✅ Génération du QR code à partir du lien court
+            // ✅ Génération du QR à partir du lien court
             const qrApi = 'https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=';
             currentQRCodeUrl = qrApi + encodeURIComponent(shortUrl);
 
-            qrContainer.innerHTML = `
-                <img src="${currentQRCodeUrl}"
-                     alt="QR Code"
-                     style="border: 4px solid #B9A378; border-radius: 1rem; padding: 1rem; background: #fff; display: block; margin: 0 auto;"
-                />
-            `;
+            if (qrContainer) {
+                qrContainer.innerHTML = `
+                    <img src="${currentQRCodeUrl}"
+                         alt="QR Code"
+                         style="border: 4px solid #B9A378; border-radius: 1rem; padding: 1rem; background: #fff; display: block; margin: 0 auto;"
+                    />
+                `;
+            }
 
         } catch (error) {
             console.error(error);
-            alert("Erreur lors de la génération du lien court. Vérifie que l’API /api/create-short-link fonctionne bien et qu’elle renvoie { success: true, shortUrl: ..., code: ... }");
+            alert("Erreur lors de la génération du lien court. Vérifie que l’API /api/create-short-link fonctionne bien.");
         } finally {
             if (btn) {
                 btn.disabled = false;
@@ -686,7 +962,7 @@
     };
 
     // 📋 Copier le lien court
-    window.copyShortLink = function() {
+    window.copyShortLink = function () {
         const input = document.getElementById('shortLinkInput');
         if (!input || !input.value) {
             alert('Aucun lien court à copier pour le moment.');
@@ -703,7 +979,7 @@
     };
 
     // 📋 Copier le lien long
-    window.copyLongLink = function() {
+    window.copyLongLink = function () {
         const input = document.getElementById('longLinkInput');
         if (!input || !input.value) {
             alert('Aucun lien long à copier pour le moment.');
@@ -719,51 +995,51 @@
         }
     };
 
-     // 📲 Copier un SMS prêt à envoyer
-window.copySmsText = function() {
-    const name = (document.getElementById('genName').value || '').trim();
-    const email = (document.getElementById('genEmail').value || '').trim();
-    const shortInput = document.getElementById('shortLinkInput');
-    const shortUrl = (shortInput && shortInput.value || '').trim();
+    // 📲 Copier le SMS prêt à envoyer
+    window.copySmsText = function () {
+        const name = (document.getElementById('genName').value || '').trim();
+        const email = (document.getElementById('genEmail').value || '').trim();
+        const shortInput = document.getElementById('shortLinkInput');
+        const shortUrl = (shortInput && shortInput.value || '').trim();
 
-    if (!shortUrl) {
-        alert('Génère d\'abord un lien court avant de copier le SMS.');
-        return;
-    }
+        if (!shortUrl) {
+            alert('Génère d\'abord un lien court avant de copier le SMS.');
+            return;
+        }
 
-    if (!name) {
-        alert('Merci d’indiquer le prénom du client pour personnaliser le SMS.');
-        return;
-    }
+        if (!name) {
+            alert('Merci d’indiquer le prénom du client pour personnaliser le SMS.');
+            return;
+        }
 
-    if (!email) {
-        alert('L’email est obligatoire pour le jeu (envoi du code par mail). Merci de le renseigner.');
-        return;
-    }
+        if (!email) {
+            alert('L’email est obligatoire pour le jeu (envoi du code par mail). Merci de le renseigner.');
+            return;
+        }
 
-    const firstName = name;
+        const firstName = name;
 
-    const message =
+        const message =
 `Bonjour ${firstName}, merci pour votre séjour chez Roc & Love 💛
 Laissez-nous un petit avis et découvrez votre cadeau 🎁 : ${shortUrl}
 Merci pour votre soutien 🥰
 Gwen & Val – Roc & Love`;
 
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(message)
-            .then(() => {
-                alert('SMS copié ✅ Tu peux maintenant le coller dans ton application de SMS 📲');
-            })
-            .catch(() => {
-                alert('Impossible de copier automatiquement. Sélectionne le texte du SMS manuellement.');
-            });
-    } else {
-        alert('Ton navigateur ne permet pas la copie automatique. Il faudra saisir le SMS manuellement.');
-    }
-};
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(message)
+                .then(() => {
+                    alert('SMS copié ✅ Tu peux maintenant le coller dans ton application de SMS 📲');
+                })
+                .catch(() => {
+                    alert('Impossible de copier automatiquement. Sélectionne le texte du SMS manuellement.');
+                });
+        } else {
+            alert('Ton navigateur ne permet pas la copie automatique. Il faudra saisir le SMS manuellement.');
+        }
+    };
 
     // 📥 Télécharger le QR code
-    window.downloadQRCode = function() {
+    window.downloadQRCode = function () {
         if (!currentQRCodeUrl) {
             alert('⚠️ Générez d\'abord un lien');
             return;
@@ -778,7 +1054,7 @@ Gwen & Val – Roc & Love`;
     };
 
     // 🖨️ Imprimer le QR code
-    window.printQRCode = function() {
+    window.printQRCode = function () {
         if (!currentQRCodeUrl) {
             alert('⚠️ Générez d\'abord un lien');
             return;
@@ -813,7 +1089,7 @@ Gwen & Val – Roc & Love`;
     };
 
     console.log('✅ Génération de liens courts active');
-</script>
+    </script>
 
 </body>
 </html>
