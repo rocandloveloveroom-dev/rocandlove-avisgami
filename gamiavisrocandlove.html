@@ -106,7 +106,9 @@
         .input-field:focus {
             outline: none; border-color: #DCD1BC; background: rgba(255, 255, 255, 0.15);
         }
-        .input-field::placeholder { color: rgba(255, 255, 255, 0.5); }
+        .input-field::placeholder { color: rgba(255, 255, 255, 0.5); 
+      }
+      
     </style>
 </head>
 <body class="bg-black text-white min-h-screen">
@@ -115,23 +117,50 @@
     
     <div class="relative z-10 container mx-auto px-4 py-8 max-w-2xl">
         
+        <!-- ⚙️ Bouton admin discret en haut à droite (comme la Love Box) -->
+        <a href="#" onclick="showAdminLogin(); return false;" class="admin-gear" title="Administration">
+
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+        </a>
+
+        <!-- 💛 Logo Roc & Love au-dessus de la box (comme sur la Love Box) -->
+        <div class="text-center mb-8 fade-in">
+            <img 
+                src="https://gami.rocandlove.fr/assets/logo.svg" 
+                alt="Roc & Love" 
+                class="w-48 h-auto mx-auto mb-4"
+                style="filter: drop-shadow(0 0 20px rgba(185, 163, 120, 0.3));"
+                onerror="this.style.display='none'; document.getElementById('fallback-title').classList.remove('hidden');"
+            />
+            <h1 id="fallback-title" class="brittany text-5xl text-center hidden" style="color: #B9A378;">
+                Roc & Love
+            </h1>
+        </div>
+        
+        <!-- 🃏 Écran d'accueil -->
         <div id="welcome-screen" class="fade-in">
             <div class="bg-gradient-to-br from-gray-900 to-black border border-yellow-900/30 rounded-2xl p-6 sm:p-8 shadow-2xl mb-6 relative">
-                <a href="#" onclick="showAdminLogin(); return false;" class="admin-gear" title="Administration">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                </a>
                 
-                <div class="logo-header">
-                    <img src="./assets/logo.svg" alt="Roc & Love" onerror="this.style.display='none'; document.getElementById('fallback-title').style.display='block';" />
-                </div>
-                <h1 id="fallback-title" class="brittany text-5xl text-center mb-6 hidden" style="color: #B9A378;">Roc & Love</h1>
-                
-                <div class="text-center mb-8">
-                    <p class="brittany text-3xl sm:text-4xl text-gray-300 mb-2" style="color: #B9A378;">
-                        Merci pour votre séjour<span id="userNameDisplay"></span>
-                    </p>
-                    <div class="text-5xl star-beat">⭐</div>
-                </div>
+             <!-- Nouveau bloc stylé façon Love Box -->
+<div class="text-center mb-10 fade-in">
+    
+    <!-- ⭐ Emoji au-dessus, plus visible -->
+    <div class="text-5xl mb-3 star-beat" style="filter: drop-shadow(0 0 12px rgba(185,163,120,0.45));">
+        ⭐
+    </div>
+
+    <!-- ✨ Titre doré façon Love Box -->
+    <p class="brittany text-3xl sm:text-4xl mb-1 fancy-gold-title">
+        Merci pour votre séjour<span id="userNameDisplay"></span>
+    </p>
+    
+</div>
+
                 
                 <div class="bg-yellow-900/20 border border-yellow-700/30 rounded-xl p-6 mb-6">
                     <div class="text-center mb-4">
@@ -158,9 +187,9 @@
             </div>
         </div>
         
+        <!-- 🧾 Écran formulaire prénom -->
         <div id="name-form-screen" class="hidden fade-in">
             <div class="bg-gradient-to-br from-gray-900 to-black border border-yellow-900/30 rounded-2xl p-6 sm:p-8 shadow-2xl">
-                <div class="logo-header"><img src="./assets/logo.svg" alt="Roc & Love" /></div>
                 <h2 class="brittany text-4xl sm:text-5xl text-center mb-4" style="color: #B9A378;">Une dernière chose !</h2>
                 <p class="georgia text-center text-gray-300 mb-6">Pour vous offrir votre cadeau, quel est votre prénom ?</p>
                 <div class="mb-6"><input type="text" id="userNameInput" class="input-field georgia text-center text-lg" placeholder="Votre prénom" required /></div>
@@ -168,9 +197,9 @@
             </div>
         </div>
         
+        <!-- 🎰 Écran carte à gratter -->
         <div id="scratch-screen" class="hidden fade-in">
             <div class="bg-gradient-to-br from-gray-900 to-black border border-yellow-900/30 rounded-2xl p-6 sm:p-8 shadow-2xl">
-                <div class="logo-header"><img src="./assets/logo.svg" alt="Roc & Love" /></div>
                 <h2 class="brittany text-4xl sm:text-5xl text-center mb-6" style="color: #B9A378;">Merci pour votre avis !</h2>
                 <div class="bg-yellow-900/20 border border-yellow-700/30 rounded-xl p-4 mb-6 text-center"><p class="georgia text-sm">✨ Grattez pour découvrir votre cadeau</p></div>
                 <div class="scratch-container mb-6">
@@ -193,9 +222,9 @@
             </div>
         </div>
         
+        <!-- ✅ Écran déjà joué -->
         <div id="already-played-screen" class="hidden fade-in">
             <div class="bg-gradient-to-br from-gray-900 to-black border border-yellow-900/30 rounded-2xl p-6 sm:p-8 shadow-2xl">
-                <div class="logo-header"><img src="./assets/logo.svg" alt="Roc & Love" /></div>
                 <div class="text-center mb-8">
                     <div class="text-7xl mb-6" id="alreadyEmoji">✅</div>
                     <h2 class="brittany text-4xl sm:text-5xl mb-8" style="color: #B9A378;">Vous avez déjà joué !</h2>
@@ -220,6 +249,7 @@
         </div>
     </div>
     
+    <!-- Modal login admin -->
     <div id="adminLoginModal" class="modal-overlay hidden" onclick="closeAdminLogin(event)">
         <div class="bg-gradient-to-br from-gray-900 to-black border border-yellow-900/30 rounded-2xl p-8 max-w-md w-full mx-4" onclick="event.stopPropagation()">
             <h3 class="brittany text-3xl text-center mb-6" style="color: #B9A378;">Accès Admin</h3>
@@ -262,9 +292,8 @@
         
         // ✅ NOUVELLE FONCTION : Vérifier dans Neon si déjà joué
         async function checkIfAlreadyPlayed() {
-            // Si pas de nom ET pas de téléphone, on ne peut pas vérifier
             if (!clientName && !clientPhone) {
-                return; // Continuer normalement
+                return;
             }
             
             try {
@@ -279,36 +308,29 @@
                 
                 if (!response.ok) {
                     console.error('Erreur vérification');
-                    return; // En cas d'erreur, laisser jouer
+                    return;
                 }
                 
                 const data = await response.json();
                 
                 if (data.hasPlayed && data.participation) {
-                    // ✅ Client a déjà joué ! Afficher l'écran "déjà joué"
                     showAlreadyPlayedScreen(data.participation);
                 }
-                // Sinon, ne rien faire (l'écran d'accueil reste affiché)
-                
             } catch (error) {
                 console.error('Erreur vérification:', error);
-                // En cas d'erreur, laisser jouer par sécurité
             }
         }
         
         // ✅ NOUVELLE FONCTION : Afficher l'écran "déjà joué"
         function showAlreadyPlayedScreen(participation) {
-            // Cacher tous les autres écrans
             document.getElementById('welcome-screen').classList.add('hidden');
             document.getElementById('name-form-screen').classList.add('hidden');
             document.getElementById('scratch-screen').classList.add('hidden');
             
-            // Remplir les informations
             document.getElementById('alreadyEmoji').textContent = participation.prizeEmoji;
             document.getElementById('alreadyPrizeTitle').textContent = participation.prizeTitle;
             document.getElementById('alreadyPromoCode').textContent = participation.promoCode;
             
-            // Afficher l'écran
             document.getElementById('already-played-screen').classList.remove('hidden');
         }
         
@@ -323,7 +345,6 @@
             }
             setupChannel(urlParams.source);
             
-            // ✅ VÉRIFIER SI LE CLIENT A DÉJÀ JOUÉ
             await checkIfAlreadyPlayed();
         }
     </script>
