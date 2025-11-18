@@ -46,7 +46,7 @@ export default async function handler(req, res) {
       margin:28px 0;
       text-align:center;
     }
-    .emoji { font-size:60px; margin-bottom:12px; }
+    .emoji { font-size:52px; margin-bottom:12px; }
     .prize-label { font-size:13px; color:#8B7355; letter-spacing:0.12em; text-transform:uppercase; }
     .prize-title { font-size:24px; color:#B9A378; margin:12px 0 10px; font-weight:bold; }
     .prize-description { font-size:15px; color:#F0E8D5; margin-bottom:16px; line-height:1.5; }
@@ -99,13 +99,18 @@ export default async function handler(req, res) {
   <div class="container">
 
     <!-- HEADER -->
-    <div class="header">
-      <img src="https://gami.rocandlove.fr/assets/logo.svg"
-           alt="Roc & Love"
-           width="200"
-           style="display:block;margin:0 auto 10px auto;">
-      <div class="subtitle">Love room • Rochecorbon</div>
-    </div>
+   <div class="header" style="
+  background: #000000;
+  padding: 36px 20px;
+  text-align: center;
+">
+  <img src="https://gami.rocandlove.fr/assets/logo.svg"
+       alt="Roc & Love"
+       width="200"
+       style="display:block;margin:0 auto 10px auto;">
+  <div class="subtitle" style="color:#bfa067;">Love room • Rochecorbon</div>
+</div>
+
 
     <!-- CONTENT -->
     <div class="content">
@@ -127,7 +132,7 @@ export default async function handler(req, res) {
         <div class="prize-description">${prizeDescription}</div>
 
         <div class="code-box">
-          <div class="code-label">Votre code unique :</div>
+          <div class="code-label">Votre code :</div>
           <div class="code">${promoCode}</div>
         </div>
 
