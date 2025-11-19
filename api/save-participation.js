@@ -1,6 +1,10 @@
 import { neon } from '@neondatabase/serverless';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export default async function handler(req, res) {
+
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
@@ -39,6 +43,46 @@ export default async function handler(req, res) {
     `;
 
     console.log('✅ Participation sauvegardée:', result[0]);
+
+        // 📥 Notification admin (toi) via Resend
+    try {
+      const adminEmail =
+        process.env.ADMIN_NOTIFICATION_EMAIL || 'contact@rocandlove.fr';
+
+      if (resend && adminEmail) {
+        const participation = result[0];
+
+        const subject = `🎁 Nouvelle participation GamiAvis – ${clientName}`;
+        const html = `
+          <h2>Nouvelle participation au jeu GamiAvis</h2>
+          <p><strong>Nom du client :</strong> ${clientName}</p>
+          <p><strong>Téléphone :</strong> ${clientPhone || 'Non renseigné'}</p>
+          <p><strong>Email :</strong> ${clientEmail || 'Non renseigné'}</p>
+          <p><strong>Canal :</strong> ${channel || 'direct'}</p>
+          <p><strong>Lot :</strong> ${prize.emoji || ''} ${prize.title}</p>
+          <p><strong>Description du lot :</strong> ${prize.description || ''}</p>
+          <p><strong>Code promo :</strong> ${code}</p>
+          <p><strong>Session ID :</strong> ${sessionId}</p>
+          <p><strong>Date :</strong> ${participation.created_at}</p>
+        `;
+
+        await resend.emails.send({
+          from: 'Roc & Love <contact@rocandlove.fr>',
+          to: [adminEmail],
+          subject,
+          html,
+        });
+
+        console.log('✅ Email de notification admin envoyé');
+      } else {
+        console.log(
+          'ℹ️ RESEND_API_KEY ou ADMIN_NOTIFICATION_EMAIL non configuré, pas de notif admin'
+        );
+      }
+    } catch (adminError) {
+      console.error('⚠️ Erreur envoi email admin (non bloquant) :', adminError);
+    }
+
 
     // 📧 Envoyer l'email SI un email est fourni
     if (clientEmail && clientEmail.trim() !== '') {
